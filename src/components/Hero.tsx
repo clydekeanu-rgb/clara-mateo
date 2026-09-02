@@ -58,22 +58,22 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
       {/* Spacer to push names to the lower third */}
       <div className="flex-1" />
 
-      {/* Hero Content: Couple Names moved lower down, subtly staggered closer to center, with larger font and date/location */}
-      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 pb-0 sm:pb-1 md:pb-2 translate-y-[15px] max-w-3xl sm:max-w-4xl md:max-w-5xl lg:max-w-6xl mx-auto">
-        <h1 className="flex flex-col select-none">
-          {/* First Partner (Mateo) - Aligned slightly to the left */}
-          <span className="text-left pl-4 sm:pl-8 md:pl-12">
-            <span className="script-font text-7xl sm:text-8xl md:text-9xl lg:text-[10.5rem] xl:text-[12rem] text-[#F7F3E8] leading-[0.8] drop-shadow-2xl inline-block">
+      {/* Hero Content: Couple Names — fluid sizing via clamp() to prevent overflow on tablet/desktop */}
+      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 pb-0 sm:pb-1 md:pb-2 translate-y-[15px] mx-auto">
+        <h1 className="flex flex-col select-none overflow-hidden">
+          {/* First Partner (Mateo) — left-aligned, fluid size capped at 7rem */}
+          <span className="text-left pl-2 sm:pl-4 md:pl-6 lg:pl-8">
+            <span className="script-font text-[clamp(2.5rem,9vw,7rem)] text-[#F7F3E8] leading-[0.85] drop-shadow-2xl inline-block">
               {content.partner_1}
             </span>
           </span>
 
-          {/* Ampersand & Second Partner (Clara) - Aligned slightly to the right */}
-          <span className="text-right pr-4 sm:pr-8 md:pr-12 -mt-3 sm:-mt-5 md:-mt-8">
-            <span className="script-font font-light text-4xl sm:text-6xl md:text-7xl lg:text-8xl text-emerald-light/90 mr-2 sm:mr-3 drop-shadow-xl inline-block align-middle">
+          {/* Ampersand & Second Partner (Clara) — right-aligned, staggered up */}
+          <span className="text-right pr-2 sm:pr-4 md:pr-6 lg:pr-8 -mt-2 sm:-mt-3 md:-mt-5">
+            <span className="script-font font-light text-[clamp(1.5rem,5vw,4.5rem)] text-emerald-light/90 mr-1 sm:mr-2 drop-shadow-xl inline-block align-middle">
               &amp;
             </span>
-            <span className="script-font text-7xl sm:text-8xl md:text-9xl lg:text-[10.5rem] xl:text-[12rem] text-[#F7F3E8] leading-[0.8] drop-shadow-2xl inline-block">
+            <span className="script-font text-[clamp(2.5rem,9vw,7rem)] text-[#F7F3E8] leading-[0.85] drop-shadow-2xl inline-block">
               {content.partner_2}
             </span>
           </span>
