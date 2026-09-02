@@ -22,7 +22,7 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
         </span>
 
         {/* Section Heading */}
-        <h2 className="serif-title font-moglan text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.15em] mb-6">
+        <h2 className="serif-title font-bold text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.15em] mb-6">
           {content.dress_code_heading}
         </h2>
 
@@ -42,10 +42,15 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
                 onMouseEnter={() => setActiveSwatch(index)}
                 onMouseLeave={() => setActiveSwatch(null)}
                 onClick={() => setActiveSwatch(activeSwatch === index ? null : index)}
+                onFocus={() => setActiveSwatch(index)}
+                onBlur={() => setActiveSwatch(null)}
+                tabIndex={0}
+                role="button"
+                aria-label={`${swatch.name} — ${swatch.hex}`}
               >
                 {/* Circular Swatch */}
                 <div
-                  className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-115 group-hover:z-30 group-hover:-translate-y-2 relative border`}
+                  className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-115 group-hover:z-30 group-hover:-translate-y-2 relative border focus:outline-none focus:ring-2 focus:ring-emerald-light focus:ring-offset-2 focus:ring-offset-[#0D1512]`}
                   style={{
                     backgroundColor: swatch.hex,
                     borderColor: swatch.border || 'rgba(255, 255, 255, 0.25)',

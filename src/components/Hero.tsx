@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { WeddingContent } from '../data/content';
 import { FloralAccent } from './FloralAccent';
+import { Volume2, VolumeX } from 'lucide-react';
+import { weddingAudio } from '../utils/audio';
 
 interface HeroProps {
   content: WeddingContent;
@@ -8,6 +10,19 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef(weddingAudio);
+
+  const toggleAudio = () => {
+    const playing = audioRef.current.toggle();
+    setIsPlaying(playing);
+  };
+
+  // Init audio state on mount (browsers block autoplay until interaction)
+  useEffect(() => {
+    setIsPlaying(audioRef.current.getStatus());
+  }, []);
+
   return (
     <header
       className={`relative w-full overflow-visible bg-[#0D1512] text-ivory flex flex-col justify-between ${
@@ -16,6 +31,16 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
           : 'min-h-screen'
       }`}
     >
+      {/* Audio toggle button — top right, persistent */}
+      <button
+        type="button"
+        onClick={toggleAudio}
+        aria-label={isPlaying ? 'Mute music' : 'Play music'}
+        className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-[#1B4332]/60 border border-emerald-light/30 text-[#F7F3E8]/80 hover:text-[#F7F3E8] hover:bg-[#1B4332] hover:border-emerald-light/60 transition-all duration-300 backdrop-blur-sm"
+      >
+        {isPlaying ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+      </button>
+
       {/* Background Image: Cropped significantly more at top (~70px) and positioned for clear focus */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <img
@@ -23,6 +48,7 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
           alt={content.hero_image_alt}
           className="w-full h-[calc(100%+70px)] -mt-[70px] sm:h-[calc(100%+85px)] sm:-mt-[85px] object-cover object-[center_top]"
           loading="eager"
+          fetchPriority="high"
           referrerPolicy="no-referrer"
         />
         {/* Soft bottom gradient fade focused on the lower portion for the names */}
@@ -53,10 +79,10 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
           </span>
         </h1>
 
-        {/* Date and Venue Subtitle - Single Line */}
+        {/* Date and Venue Subtitle - Uses template data instead of hardcoded value */}
         <div className="mt-2 sm:mt-3 text-center">
           <p className="text-sage/90 text-xs sm:text-sm md:text-base serif-title tracking-[0.22em] uppercase drop-shadow-md whitespace-nowrap">
-            12|18|2026 &nbsp;•&nbsp; Tagaytay, Philippines
+            {content.event_date_short} &nbsp;•&nbsp; {content.venue_city}
           </p>
         </div>
       </div>

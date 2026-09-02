@@ -19,8 +19,8 @@
   --color-ink-muted: #574F44;
   --color-ink-light: #7A7062;
 
-  --font-serif: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
-  --font-display: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
+  --font-serif: "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
+  --font-display: "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
   --font-body: "Cormorant Garamond", "Palatino", "Georgia", serif;
   --font-script: "Great Vibes", "Parisienne", "Brush Script MT", cursive;
 }
@@ -48,20 +48,10 @@ body {
 }
 
 .serif-title {
-  font-family: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", Georgia, serif !important;
+  font-family: var(--font-serif);
   text-transform: uppercase;
   letter-spacing: 0.15em;
   font-feature-settings: "liga" 1, "dlig" 1;
-}
-
-.font-moglan {
-  font-family: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", Georgia, serif !important;
-  letter-spacing: 0.14em;
-  font-feature-settings: "liga" 1, "dlig" 1;
-}
-
-.font-script {
-  font-family: var(--font-script);
 }
 
 .font-serif {
@@ -70,6 +60,10 @@ body {
 
 .font-body {
   font-family: var(--font-body);
+}
+
+.font-script {
+  font-family: var(--font-script);
 }
 
 /* Elegant Dark Film Grain Filter */
@@ -113,3 +107,25 @@ body {
   background: #52B788;
 }
 
+/* Screen-reader only utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .grain { display: none; }
+}

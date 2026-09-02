@@ -7,14 +7,31 @@ interface WelcomeProps {
 }
 
 export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
-  // Generate Google Calendar Link (Philippine Time UTC+8: 2026-12-18 15:30 -> 07:30 UTC)
+  // Derive ISO date from content instead of hardcoding — avoids timezone drift
+  const isoDate = content.event_iso_date || '2026-12-18T15:30:00+08:00';
+  const d = new Date(isoDate);
+  const yyyy = d.getUTCFullYear();
+  const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
+  const dd = String(d.getUTCDate()).padStart(2, '0');
+  const HH = String(d.getUTCHours()).padStart(2, '0');
+  const MM = String(d.getUTCMinutes()).padStart(2, '0');
+  const startISO = `${yyyy}${mm}${dd}T${HH}${MM}00`;
+
+  // End time: ceremony + 7.5 hours
+  const endD = new Date(d.getTime() + 7.5 * 60 * 60 * 1000);
+  const eYYYY = endD.getUTCFullYear();
+  const emm = String(endD.getUTCMonth() + 1).padStart(2, '0');
+  const edd = String(endD.getUTCDate()).padStart(2, '0');
+  const eHH = String(endD.getUTCHours()).padStart(2, '0');
+  const eMM = String(endD.getUTCMinutes()).padStart(2, '0');
+  const endISO = `${eYYYY}${emm}${edd}T${eHH}${eMM}00`;
+
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     `${content.partner_1} & ${content.partner_2}'s Wedding`
-  )}&dates=20261218T073000Z/20261218T160000Z&details=${encodeURIComponent(
+  )}&dates=${startISO}/${endISO}&details=${encodeURIComponent(
     `Wedding celebration of ${content.partner_1} and ${content.partner_2} at ${content.venue_name}, ${content.venue_city}`
   )}&location=${encodeURIComponent(`${content.venue_name}, ${content.venue_address}`)}`;
 
-  // Generate .ics calendar download
   const handleDownloadICS = () => {
     const icsContent = [
       'BEGIN:VCALENDAR',
@@ -24,8 +41,8 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
       `SUMMARY:${content.partner_1} & ${content.partner_2}'s Wedding`,
       `DESCRIPTION:Celebrating the wedding of ${content.partner_1} and ${content.partner_2}`,
       `LOCATION:${content.venue_name}, ${content.venue_address}`,
-      'DTSTART:20261218T153000',
-      'DTEND:20261218T233000',
+      `DTSTART:${startISO}`,
+      `DTEND:${endISO}`,
       'STATUS:CONFIRMED',
       'END:VEVENT',
       'END:VCALENDAR',
@@ -46,7 +63,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
       {/* Decorative content container constrained to max 640px */}
       <div className="max-w-[640px] mx-auto text-center relative z-10">
         {/* Salutation / Section Title */}
-        <h2 className="serif-title font-moglan text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.14em] mb-6 drop-shadow-sm">
+        <h2 className="serif-title font-bold text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.14em] mb-6 drop-shadow-sm">
           {content.welcome.salutation}
         </h2>
 
