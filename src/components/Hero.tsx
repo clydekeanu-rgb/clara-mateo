@@ -58,28 +58,28 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
       {/* Spacer to push names to the lower third */}
       <div className="flex-1" />
 
-      {/* Hero Content: Couple Names — fluid sizing via clamp() to prevent overflow on tablet/desktop */}
-      <div className="relative z-10 w-full px-4 sm:px-8 lg:px-12 pb-0 sm:pb-1 md:pb-2 translate-y-[15px] mx-auto">
-        <h1 className="flex flex-col select-none overflow-hidden">
-          {/* First Partner (Mateo) — left-aligned, fluid size capped at 7rem */}
-          <span className="text-left pl-2 sm:pl-4 md:pl-6 lg:pl-8">
-            <span className="script-font text-[clamp(2.5rem,9vw,7rem)] text-[#F7F3E8] leading-[0.85] drop-shadow-2xl inline-block">
+      {/* Hero Content: Couple Names — constrained to fit within sticky column */}
+      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pb-0 sm:pb-1 md:pb-2 translate-y-[10px] mx-auto">
+        <h1 className="flex flex-col select-none">
+          {/* First Partner (Mateo) — left-aligned */}
+          <span className="text-left pl-1 sm:pl-2 md:pl-3">
+            <span className="script-font text-[clamp(1.8rem,5vw,4rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
               {content.partner_1}
             </span>
           </span>
 
           {/* Ampersand & Second Partner (Clara) — right-aligned, staggered up */}
-          <span className="text-right pr-2 sm:pr-4 md:pr-6 lg:pr-8 -mt-2 sm:-mt-3 md:-mt-5">
-            <span className="script-font font-light text-[clamp(1.5rem,5vw,4.5rem)] text-emerald-light/90 mr-1 sm:mr-2 drop-shadow-xl inline-block align-middle">
+          <span className="text-right pr-1 sm:pr-2 md:pr-3 -mt-1 sm:-mt-2 md:-mt-3">
+            <span className="script-font font-light text-[clamp(1rem,3vw,2.5rem)] text-emerald-light/90 mr-1 drop-shadow-xl inline-block align-middle">
               &amp;
             </span>
-            <span className="script-font text-[clamp(2.5rem,9vw,7rem)] text-[#F7F3E8] leading-[0.85] drop-shadow-2xl inline-block">
+            <span className="script-font text-[clamp(1.8rem,5vw,4rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
               {content.partner_2}
             </span>
           </span>
         </h1>
 
-        {/* Date and Venue Subtitle - Uses template data instead of hardcoded value */}
+        {/* Date and Venue Subtitle */}
         <div className="mt-2 sm:mt-3 text-center">
           <p className="text-sage/90 text-xs sm:text-sm md:text-base serif-title tracking-[0.22em] uppercase drop-shadow-md whitespace-nowrap">
             {content.event_date_short} &nbsp;•&nbsp; {content.venue_city}
