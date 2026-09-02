@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+@theme {
+  --color-emerald: #1B4332;
+  --color-emerald-deep: #1B4332;
+  --color-emerald-accent: #255a43;
+  --color-emerald-light: #52B788;
+  --color-emerald-gold: #C5A869;
+  --color-night: #0D1512;
+  --color-night-surface: #141F1A;
+  --color-night-elevated: #1A2822;
+  --color-cream: #EDE6D3;
+  --color-cream-light: #F7F3E8;
+  --color-ivory: #F7F3E8;
+  --color-sage: #9CAF9A;
+  --color-sage-light: #C2CEC2;
+  --color-sage-dark: #6C816C;
+  --color-ink: #2B2620;
+  --color-ink-muted: #574F44;
+  --color-ink-light: #7A7062;
+
+  --font-serif: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
+  --font-display: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
+  --font-body: "Cormorant Garamond", "Palatino", "Georgia", serif;
+  --font-script: "Great Vibes", "Parisienne", "Brush Script MT", cursive;
+}
+
+:root {
+  --night: #0D1512;
+  --emerald: #1B4332;
+  --cream: #EDE6D3;
+  --ivory: #F7F3E8;
+  --sage: #9CAF9A;
+  --ink: #2B2620;
+}
+
+/* Custom base font rules */
+body {
+  font-family: var(--font-body);
+  font-size: 1.125rem;
+  line-height: 1.7;
+  color: var(--color-ink);
+  background-color: var(--color-night);
+}
+
+.script-font {
+  font-family: var(--font-script);
+}
+
+.serif-title {
+  font-family: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", Georgia, serif !important;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-feature-settings: "liga" 1, "dlig" 1;
+}
+
+.font-moglan {
+  font-family: "Moglan", "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", Georgia, serif !important;
+  letter-spacing: 0.14em;
+  font-feature-settings: "liga" 1, "dlig" 1;
+}
+
+.font-script {
+  font-family: var(--font-script);
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* Elegant Dark Film Grain Filter */
+.grain {
+  position: fixed;
+  inset: 0;
+  background-image: url('data:image/svg+xml,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)"/%3E%3C/svg%3E');
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* Torn Edge shadow depth */
+.torn-edge {
+  filter: drop-shadow(0 3px 6px rgba(0, 0, 0, 0.28));
+}
+
+/* Subtle aged paper grain overlay */
+.paper-texture {
+  background-image: radial-gradient(rgba(43, 38, 32, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+.dark-texture {
+  background-image: radial-gradient(rgba(247, 243, 232, 0.025) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0D1512;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D6A4F;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #52B788;
+}
+

@@ -1,0 +1,6 @@
+{
+  "name": "Wedding Invitation Template",
+  "description": "An elegant, single-page vertically scrolling wedding invitation template with deep emerald and warm cream palette, hand-torn paper dividers, and customizable content.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
