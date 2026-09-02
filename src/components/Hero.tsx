@@ -58,22 +58,22 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
       {/* Spacer to push names to the lower third */}
       <div className="flex-1" />
 
-      {/* Hero Content: Couple Names — constrained to fit within sticky column */}
+      {/* Hero Content: Couple Names — centered with 30% larger font */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pb-0 sm:pb-1 md:pb-2 translate-y-[10px] mx-auto">
-        <h1 className="flex flex-col select-none">
-          {/* First Partner (Mateo) — left-aligned */}
-          <span className="text-left pl-1 sm:pl-2 md:pl-3">
-            <span className="script-font text-[clamp(1.8rem,5vw,4rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
+        <h1 className="flex flex-col select-none text-center">
+          {/* First Partner (Mateo) — centered with slight offset */}
+          <span className="mx-auto pl-2 sm:pl-4 md:pl-6">
+            <span className="script-font text-[clamp(2.3rem,6.5vw,5rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
               {content.partner_1}
             </span>
           </span>
 
-          {/* Ampersand & Second Partner (Clara) — right-aligned, staggered up */}
-          <span className="text-right pr-1 sm:pr-2 md:pr-3 -mt-1 sm:-mt-2 md:-mt-3">
-            <span className="script-font font-light text-[clamp(1rem,3vw,2.5rem)] text-emerald-light/90 mr-1 drop-shadow-xl inline-block align-middle">
+          {/* Ampersand & Second Partner (Clara) — centered with slight offset */}
+          <span className="mx-auto pr-2 sm:pr-4 md:pr-6 -mt-1 sm:-mt-2 md:-mt-3">
+            <span className="script-font font-light text-[clamp(1.3rem,4vw,3rem)] text-emerald-light/90 mr-1 drop-shadow-xl inline-block align-middle">
               &amp;
             </span>
-            <span className="script-font text-[clamp(1.8rem,5vw,4rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
+            <span className="script-font text-[clamp(2.3rem,6.5vw,5rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
               {content.partner_2}
             </span>
           </span>
