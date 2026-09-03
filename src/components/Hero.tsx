@@ -18,9 +18,10 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
     setIsPlaying(playing);
   };
 
-  // Init audio state on mount (browsers block autoplay until interaction)
+  // Sync audio state on mount and across state changes
   useEffect(() => {
-    setIsPlaying(audioRef.current.getStatus());
+    const unsubscribe = weddingAudio.subscribe(setIsPlaying);
+    return unsubscribe;
   }, []);
 
   return (
@@ -58,37 +59,30 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
       {/* Spacer to push names to the lower third */}
       <div className="flex-1" />
 
-      {/* Hero Content: Classic stagger layout — Mateo left, ampersand center, Clara right */}
-      <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 pb-0 sm:pb-1 md:pb-2 translate-y-[10px] mx-auto">
-        <h1 className="flex flex-col select-none">
-          {/* First line: Mateo (left) */}
-          <span className="text-left pl-2 sm:pl-4 md:pl-6">
-            <span className="script-font text-[clamp(2.3rem,6.5vw,5rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
+      {/* Hero Content: Centered staggered lockup — Mateo slightly left, Clara slightly right, 5px padding from bouquet */}
+      <div className="relative z-10 w-full px-4 sm:px-6 pb-0 translate-y-[44px] sm:translate-y-[48px] lg:translate-y-[22px] mx-auto text-center">
+        <h1 className="inline-flex flex-col items-center select-none">
+          {/* First line: Mateo (slightly left of center) */}
+          <div className="self-center -translate-x-6 sm:-translate-x-8 lg:-translate-x-6">
+            <span className="script-font text-[clamp(4.5rem,11.5vw,8rem)] lg:text-[clamp(2.5rem,3.1vw,3.2rem)] text-[#F7F3E8] leading-[0.88] drop-shadow-2xl inline-block">
               {content.partner_1}
             </span>
-          </span>
+          </div>
 
-          {/* Second line: & Clara (right-aligned, staggered up) */}
-          <span className="text-right pr-2 sm:pr-4 md:pr-6 -mt-2 sm:-mt-3 md:-mt-4">
-            <span className="script-font font-light text-[clamp(1.3rem,4vw,3rem)] text-emerald-light/90 mr-2 sm:mr-3 drop-shadow-xl inline-block align-middle">
+          {/* Second line: & Clara (slightly right of center, vertical spacing) */}
+          <div className="self-center translate-x-5 sm:translate-x-7 lg:translate-x-5 mt-2 sm:mt-3 lg:mt-1.5">
+            <span className="script-font font-light text-[clamp(2.4rem,6.8vw,4.8rem)] lg:text-[clamp(1.5rem,1.8vw,1.9rem)] text-emerald-light/90 mr-2 sm:mr-3 lg:mr-2 drop-shadow-xl inline-block align-middle">
               &amp;
             </span>
-            <span className="script-font text-[clamp(2.3rem,6.5vw,5rem)] text-[#F7F3E8] leading-[0.9] drop-shadow-2xl inline-block">
+            <span className="script-font text-[clamp(4.5rem,11.5vw,8rem)] lg:text-[clamp(2.5rem,3.1vw,3.2rem)] text-[#F7F3E8] leading-[0.88] drop-shadow-2xl inline-block">
               {content.partner_2}
             </span>
-          </span>
+          </div>
         </h1>
-
-        {/* Date and Venue Subtitle */}
-        <div className="mt-3 sm:mt-4 text-center">
-          <p className="text-sage/90 text-xs sm:text-sm md:text-base serif-title tracking-[0.22em] uppercase drop-shadow-md whitespace-nowrap">
-            {content.event_date_short} &nbsp;•&nbsp; {content.venue_city}
-          </p>
-        </div>
       </div>
 
       {/* Full-width Floral Bouquet Garland */}
-      <div className="relative z-30 w-full flex items-end justify-center pointer-events-none -mb-20 sm:-mb-24 md:-mb-28 translate-y-[38px] sm:translate-y-[50px] md:translate-y-[60px]">
+      <div className="relative z-30 w-full flex items-end justify-center pointer-events-none -mb-16 sm:-mb-20 md:-mb-24 lg:-mb-14 translate-y-[32px] sm:translate-y-[42px] md:translate-y-[48px] lg:translate-y-[22px]">
         <FloralAccent position="hero-seam" size="full" className="w-full px-0" />
       </div>
     </header>

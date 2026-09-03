@@ -23,33 +23,44 @@ export const DetailsSection: React.FC<DetailsSectionProps> = ({ content }) => {
           {content.details_heading}
         </h2>
 
-        {/* Notes Cards / Paragraphs */}
-        <div className="space-y-10 sm:space-y-12">
-          {/* Paragraph 1: Flowers & Wine */}
-          <div className="relative p-8 sm:p-10 rounded-xs bg-[#F7F3E8] border border-[#1B4332]/20 shadow-sm transition-all duration-300 hover:border-[#1B4332]/40">
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/15 mb-4">
-              <Wine className="w-5 h-5" />
+        {/* Notes Cards */}
+        <div className="space-y-8 sm:space-y-10">
+          {(content.details_cards && content.details_cards.length > 0
+            ? content.details_cards
+            : [
+                {
+                  title: "Wedding Registry",
+                  icon: "gift" as const,
+                  description: content.details_paragraphs[0] || "",
+                },
+                {
+                  title: "Attire & Garden Footwear",
+                  icon: "comfort" as const,
+                  description: content.details_paragraphs[1] || "",
+                },
+              ]
+          ).map((card, idx) => (
+            <div
+              key={idx}
+              className="relative p-8 sm:p-10 rounded-xs bg-[#F7F3E8] border border-[#1B4332]/20 shadow-xs transition-all duration-300 hover:border-[#1B4332]/45 hover:shadow-sm"
+            >
+              <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/15 mb-4">
+                {card.icon === 'gift' ? (
+                  <Gift className="w-5 h-5" />
+                ) : card.icon === 'wine' ? (
+                  <Wine className="w-5 h-5" />
+                ) : (
+                  <Sparkles className="w-5 h-5" />
+                )}
+              </div>
+              <h3 className="serif-title text-sm sm:text-base text-[#1B4332] font-bold tracking-wider mb-3">
+                {card.title}
+              </h3>
+              <p className="font-body text-base sm:text-lg text-[#2B2620]/85 leading-relaxed font-light">
+                {card.description}
+              </p>
             </div>
-            <h3 className="serif-title text-sm sm:text-base text-[#1B4332] font-bold tracking-wider mb-3">
-              Flowers &amp; Spirits
-            </h3>
-            <p className="font-body text-base sm:text-lg text-[#2B2620]/85 leading-relaxed font-light">
-              {content.details_paragraphs[0]}
-            </p>
-          </div>
-
-          {/* Paragraph 2: Gifts & Registry */}
-          <div className="relative p-8 sm:p-10 rounded-xs bg-[#F7F3E8] border border-[#1B4332]/20 shadow-sm transition-all duration-300 hover:border-[#1B4332]/40">
-            <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/15 mb-4">
-              <Gift className="w-5 h-5" />
-            </div>
-            <h3 className="serif-title text-sm sm:text-base text-[#1B4332] font-bold tracking-wider mb-3">
-              Wedding Registry
-            </h3>
-            <p className="font-body text-base sm:text-lg text-[#2B2620]/85 leading-relaxed font-light">
-              {content.details_paragraphs[1]}
-            </p>
-          </div>
+          ))}
         </div>
       </div>
     </section>

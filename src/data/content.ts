@@ -19,6 +19,12 @@ export interface SwatchItem {
   border?: string;
 }
 
+export interface DetailCard {
+  title: string;
+  description: string;
+  icon: 'gift' | 'comfort' | 'wine';
+}
+
 export interface WeddingContent {
   // Couple & Branding
   partner_1: string;
@@ -29,7 +35,7 @@ export interface WeddingContent {
   event_date: string;
   event_date_short: string;
   event_time_ceremony: string;
-  event_iso_date: string; // YYYY-MM-DD for calendar links
+  event_iso_date: string; // ISO 8601 with timezone offset (e.g. 2026-12-18T15:30:00+08:00)
   
   // Venue
   venue_name: string;
@@ -44,6 +50,7 @@ export interface WeddingContent {
   table_setting_image_alt: string;
   venue_image: string;
   venue_image_alt: string;
+  gallery_images?: { src: string; alt: string }[];
   
   // Sections Copy
   welcome: {
@@ -69,6 +76,7 @@ export interface WeddingContent {
   details_heading: string;
   details_subtitle: string;
   details_paragraphs: string[];
+  details_cards?: DetailCard[];
   
   rsvp_heading: string;
   rsvp_subtitle: string;
@@ -89,7 +97,7 @@ export const weddingContent: WeddingContent = {
   event_date: "December 18, 2026",
   event_date_short: "12.18.2026",
   event_time_ceremony: "3:30 PM",
-  event_iso_date: "2026-12-18T15:30:00",
+  event_iso_date: "2026-12-18T15:30:00+08:00",
   
   venue_name: "Angelfields Nature Sanctuary",
   venue_city: "Tagaytay, Cavite, Philippines",
@@ -106,6 +114,41 @@ export const weddingContent: WeddingContent = {
   venue_image: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=1600&q=80",
   venue_image_alt: "Angelfields Nature Sanctuary grounds and grand estate in Tagaytay at dusk",
   
+  gallery_images: [
+    {
+      src: "/prenup/Couple_posing_for_photos_2K_2026090320384.jpeg",
+      alt: "Mateo & Clara walking hand-in-hand and laughing on the sunlit veranda",
+    },
+    {
+      src: "/prenup/Couple_posing_for_photos_2K_2026090320382.jpeg",
+      alt: "Intimate forehead embrace framed by gentle garden blossoms",
+    },
+    {
+      src: "/prenup/Couple_in_photo_collage_mood_2K_20260903204623.jpeg",
+      alt: "Playful jump together along the open scenic mountain road",
+    },
+    {
+      src: "/prenup/Couple_posing_for_photos_2K_2026090320381.jpeg",
+      alt: "Loving embrace beneath the floral garden wedding arch",
+    },
+    {
+      src: "/prenup/Couple_in_photo_collage_mood_2K_2026090320463.jpeg",
+      alt: "Golden hour hilltop embrace holding delicate wildflowers",
+    },
+    {
+      src: "/prenup/232342.jpeg",
+      alt: "Joyful laughter as Mateo lifts Clara on the open countryside trail",
+    },
+    {
+      src: "/prenup/Couple_posing_for_portrait_outdoors_202609031806.jpeg",
+      alt: "Tender moment holding each other in the rustic pavilion with hanging ribbons",
+    },
+    {
+      src: "/prenup/Couple_posing_for_photos_2K_2026090320383.jpeg",
+      alt: "Sunset glow overlooking the verdant countryside from the porch",
+    },
+  ],
+  
   welcome: {
     salutation: "Dear family and friends,",
     intro: "With joyful hearts, we invite you to join us as we exchange our vows and celebrate our holy matrimony.",
@@ -113,7 +156,7 @@ export const weddingContent: WeddingContent = {
     closing: "We cannot wait to celebrate with you amidst the cool garden breeze of Tagaytay.",
   },
   
-  schedule_heading: "Timing",
+  schedule_heading: "Program",
   schedule_subtitle: "Schedule of the Day",
   schedule: [
     {
@@ -163,6 +206,18 @@ export const weddingContent: WeddingContent = {
   details_paragraphs: [
     "In lieu of boxed gifts, a monetary blessing toward our new home and the start of our married life together would be deeply appreciated.",
     "The venue features garden walkways and Tagaytay evenings can be pleasantly breezy. We recommend comfortable footwear and a light wrap or blazer for the outdoor reception.",
+  ],
+  details_cards: [
+    {
+      title: "Wedding Registry",
+      icon: "gift",
+      description: "In lieu of boxed gifts, a monetary blessing toward our new home and the start of our married life together would be deeply appreciated.",
+    },
+    {
+      title: "Attire & Garden Footwear",
+      icon: "comfort",
+      description: "The venue features garden walkways and Tagaytay evenings can be pleasantly breezy. We recommend comfortable footwear and a light wrap or blazer for the outdoor reception.",
+    },
   ],
   
   rsvp_heading: "RSVP",

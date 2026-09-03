@@ -16,7 +16,7 @@ export const Timing: React.FC<TimingProps> = ({ content }) => {
         </span>
 
         {/* Section Heading */}
-        <h2 className="serif-title font-moglan text-3xl sm:text-4xl md:text-5xl text-[#1B4332] font-normal tracking-[0.15em] mb-14">
+        <h2 className="serif-title text-3xl sm:text-4xl md:text-5xl text-[#1B4332] font-normal tracking-[0.15em] mb-14">
           {content.schedule_heading}
         </h2>
 

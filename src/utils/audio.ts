@@ -1,22 +1,42 @@
 /**
- * Ambient Gentle Wedding Music Synthesizer (Web Audio API)
- * Generates an ethereal, romantic, soothing acoustic harp/piano arpeggio chord progression
- * completely self-contained with no external mp3 assets required.
+ * Wedding Audio Player
+ * Plays the romantic soundtrack: "Clara & Mateo"
  */
+import claraMateoAudio from '../assets/audio/clara-mateo.mp3';
 
 class WeddingAudioPlayer {
-  private ctx: AudioContext | null = null;
+  private audio: HTMLAudioElement | null = null;
   private isPlaying = false;
-  private timerId: number | null = null;
-  private currentStep = 0;
+  private listeners: Set<(playing: boolean) => void> = new Set();
 
-  // Romantic chord progression in E Major / C# minor (E - B/D# - C#m - A)
-  private chords = [
-    [329.63, 392.00, 493.88, 587.33, 659.25], // Em9
-    [293.66, 369.99, 440.00, 587.33, 739.99], // D6/9
-    [261.63, 329.63, 392.00, 493.88, 523.25], // Cmaj7
-    [246.94, 293.66, 369.99, 440.00, 587.33], // Bm7
-  ];
+  private getAudio(): HTMLAudioElement {
+    if (!this.audio && typeof window !== 'undefined') {
+      this.audio = new Audio(claraMateoAudio);
+      this.audio.loop = true;
+      this.audio.volume = 0.65;
+      this.audio.preload = 'auto';
+
+      this.audio.addEventListener('play', () => {
+        this.isPlaying = true;
+        this.notify();
+      });
+
+      this.audio.addEventListener('pause', () => {
+        this.isPlaying = false;
+        this.notify();
+      });
+
+      this.audio.addEventListener('ended', () => {
+        this.isPlaying = false;
+        this.notify();
+      });
+    }
+    return this.audio!;
+  }
+
+  private notify() {
+    this.listeners.forEach((listener) => listener(this.isPlaying));
+  }
 
   public toggle(): boolean {
     if (this.isPlaying) {
@@ -29,74 +49,40 @@ class WeddingAudioPlayer {
   }
 
   public play() {
-    if (!this.ctx) {
-      const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-      this.ctx = new AudioCtx();
-    }
-    if (this.ctx.state === 'suspended') {
-      this.ctx.resume();
-    }
+    const audio = this.getAudio();
+    if (!audio) return;
 
-    this.isPlaying = true;
-    this.scheduleNotes();
+    audio
+      .play()
+      .then(() => {
+        this.isPlaying = true;
+        this.notify();
+      })
+      .catch((err) => {
+        console.warn('Audio playback was prevented or interrupted:', err);
+        this.isPlaying = false;
+        this.notify();
+      });
   }
 
   public stop() {
-    this.isPlaying = false;
-    if (this.timerId !== null) {
-      window.clearTimeout(this.timerId);
-      this.timerId = null;
+    if (this.audio) {
+      this.audio.pause();
     }
+    this.isPlaying = false;
+    this.notify();
   }
 
   public getStatus(): boolean {
     return this.isPlaying;
   }
 
-  private scheduleNotes() {
-    if (!this.isPlaying || !this.ctx) return;
-
-    const chordIndex = Math.floor(this.currentStep / 8) % this.chords.length;
-    const noteInChord = this.currentStep % 8;
-    const chord = this.chords[chordIndex];
-
-    // Pick note for soothing arpeggio
-    const pattern = [0, 2, 1, 3, 2, 4, 3, 1];
-    const freq = chord[pattern[noteInChord] % chord.length];
-
-    this.playTone(freq);
-
-    this.currentStep++;
-    this.timerId = window.setTimeout(() => this.scheduleNotes(), 420);
-  }
-
-  private playTone(freq: number) {
-    if (!this.ctx) return;
-    const now = this.ctx.currentTime;
-
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    const filter = this.ctx.createBiquadFilter();
-
-    osc.type = 'sine';
-    osc.frequency.setValueAtTime(freq, now);
-
-    // Warm low-pass acoustic resonance filter
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(900, now);
-    filter.Q.setValueAtTime(2.5, now);
-
-    // Gentle fade in & ringing plucked decay
-    gain.gain.setValueAtTime(0.001, now);
-    gain.gain.exponentialRampToValueAtTime(0.08, now + 0.04);
-    gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.2);
-
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(this.ctx.destination);
-
-    osc.start(now);
-    osc.stop(now + 2.4);
+  public subscribe(callback: (playing: boolean) => void): () => void {
+    this.listeners.add(callback);
+    callback(this.isPlaying);
+    return () => {
+      this.listeners.delete(callback);
+    };
   }
 }
 

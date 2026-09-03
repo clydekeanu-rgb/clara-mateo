@@ -7,24 +7,23 @@ interface WelcomeProps {
 }
 
 export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
-  // Derive ISO date from content instead of hardcoding — avoids timezone drift
+  // Derive ISO date from content with timezone support — ensures consistent time worldwide
   const isoDate = content.event_iso_date || '2026-12-18T15:30:00+08:00';
   const d = new Date(isoDate);
-  const yyyy = d.getUTCFullYear();
-  const mm = String(d.getUTCMonth() + 1).padStart(2, '0');
-  const dd = String(d.getUTCDate()).padStart(2, '0');
-  const HH = String(d.getUTCHours()).padStart(2, '0');
-  const MM = String(d.getUTCMinutes()).padStart(2, '0');
-  const startISO = `${yyyy}${mm}${dd}T${HH}${MM}00`;
+  
+  // Format UTC dates with 'Z' suffix so calendar providers parse the exact absolute time correctly
+  const formatUtcCompact = (date: Date): string => {
+    const yyyy = date.getUTCFullYear();
+    const mm = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const dd = String(date.getUTCDate()).padStart(2, '0');
+    const hh = String(date.getUTCHours()).padStart(2, '0');
+    const min = String(date.getUTCMinutes()).padStart(2, '0');
+    return `${yyyy}${mm}${dd}T${hh}${min}00Z`;
+  };
 
-  // End time: ceremony + 7.5 hours
-  const endD = new Date(d.getTime() + 7.5 * 60 * 60 * 1000);
-  const eYYYY = endD.getUTCFullYear();
-  const emm = String(endD.getUTCMonth() + 1).padStart(2, '0');
-  const edd = String(endD.getUTCDate()).padStart(2, '0');
-  const eHH = String(endD.getUTCHours()).padStart(2, '0');
-  const eMM = String(endD.getUTCMinutes()).padStart(2, '0');
-  const endISO = `${eYYYY}${emm}${edd}T${eHH}${eMM}00`;
+  const startISO = formatUtcCompact(d);
+  // End time: ceremony + 7.5 hours (concludes at ~11:00 PM)
+  const endISO = formatUtcCompact(new Date(d.getTime() + 7.5 * 60 * 60 * 1000));
 
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     `${content.partner_1} & ${content.partner_2}'s Wedding`
@@ -37,6 +36,8 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'PRODID:-//Curated Pages//Wedding Invitation//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
       'BEGIN:VEVENT',
       `SUMMARY:${content.partner_1} & ${content.partner_2}'s Wedding`,
       `DESCRIPTION:Celebrating the wedding of ${content.partner_1} and ${content.partner_2}`,
@@ -59,11 +60,11 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
   };
 
   return (
-    <section className="relative w-full bg-[#0D1512] dark-texture text-[#F7F3E8] pt-40 pb-20 sm:pt-52 sm:pb-28 md:pt-60 md:pb-32 px-6 overflow-hidden">
+    <section className="relative w-full bg-[#0D1512] dark-texture text-[#F7F3E8] pt-44 pb-6 sm:pt-48 sm:pb-8 md:pt-52 md:pb-8 lg:pt-20 lg:pb-10 px-6 overflow-hidden">
       {/* Decorative content container constrained to max 640px */}
       <div className="max-w-[640px] mx-auto text-center relative z-10">
         {/* Salutation / Section Title */}
-        <h2 className="serif-title font-bold text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.14em] mb-6 drop-shadow-sm">
+        <h2 className="serif-title text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-medium tracking-[0.14em] mb-6 drop-shadow-sm">
           {content.welcome.salutation}
         </h2>
 

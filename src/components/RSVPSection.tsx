@@ -165,9 +165,10 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
               <label className="block text-xs sm:text-sm serif-title tracking-widest uppercase text-[#9CAF9A] mb-2">
                 Will you be attending? <span className="text-emerald-light">*</span>
               </label>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="grid grid-cols-2 gap-3 sm:gap-4" role="group" aria-label="Attendance selection">
                 <button
                   type="button"
+                  aria-pressed={formData.attending === 'yes'}
                   onClick={() => setFormData({ ...formData, attending: 'yes' })}
                   className={`py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
                     formData.attending === 'yes'
@@ -179,6 +180,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                 </button>
                 <button
                   type="button"
+                  aria-pressed={formData.attending === 'no'}
                   onClick={() => setFormData({ ...formData, attending: 'no' })}
                   className={`py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
                     formData.attending === 'no'
@@ -201,7 +203,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   Total Number of Guests in Party
                 </label>
                 <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#9CAF9A]/60">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-[#9CAF9A]/70">
                     <Users className="w-4 h-4" />
                   </div>
                   <select
@@ -226,10 +228,10 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   htmlFor="rsvp-dietary"
                   className="block text-xs sm:text-sm serif-title tracking-widest uppercase text-[#9CAF9A] mb-2"
                 >
-                  Dietary Preferences or Allergies <span className="text-[#9CAF9A]/60 text-xs font-normal">(Optional)</span>
+                  Dietary Preferences or Allergies <span className="text-[#9CAF9A]/80 text-xs font-normal">(Optional)</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#9CAF9A]/60">
+                  <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#9CAF9A]/70">
                     <Utensils className="w-4 h-4" />
                   </div>
                   <input
@@ -238,7 +240,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                     placeholder="e.g. Vegetarian, Gluten-free, Nut allergy"
                     value={formData.dietaryNotes}
                     onChange={(e) => setFormData({ ...formData, dietaryNotes: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/30 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg"
+                    className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/50 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg"
                   />
                 </div>
               </div>
@@ -250,10 +252,10 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                 htmlFor="rsvp-message"
                 className="block text-xs sm:text-sm serif-title tracking-widest uppercase text-[#9CAF9A] mb-2"
               >
-                Message for the Couple <span className="text-[#9CAF9A]/60 text-xs font-normal">(Optional)</span>
+                Message for the Couple <span className="text-[#9CAF9A]/80 text-xs font-normal">(Optional)</span>
               </label>
               <div className="relative">
-                <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#9CAF9A]/60">
+                <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#9CAF9A]/70">
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <textarea
@@ -262,7 +264,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   placeholder="Share a wish or sweet memory..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/30 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg resize-none"
+                  className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/50 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg resize-none"
                 />
               </div>
             </div>

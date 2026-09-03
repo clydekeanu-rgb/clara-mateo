@@ -19,10 +19,10 @@
   --color-ink-muted: #574F44;
   --color-ink-light: #7A7062;
 
-  --font-serif: "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
-  --font-display: "Bodoni Moda", "Italiana", "Cinzel", "Montaga", "Playfair Display", "Palatino", "Georgia", serif;
+  --font-serif: "Cinzel", "Palatino", "Georgia", serif;
+  --font-display: "Cinzel", "Palatino", "Georgia", serif;
   --font-body: "Cormorant Garamond", "Palatino", "Georgia", serif;
-  --font-script: "Great Vibes", "Parisienne", "Brush Script MT", cursive;
+  --font-script: "Great Vibes", "Brush Script MT", cursive;
 }
 
 :root {
@@ -39,7 +39,7 @@ body {
   font-family: var(--font-body);
   font-size: 1.125rem;
   line-height: 1.7;
-  color: var(--color-ink);
+  color: var(--color-ivory);
   background-color: var(--color-night);
 }
 

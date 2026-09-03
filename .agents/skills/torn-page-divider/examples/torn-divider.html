@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Torn Page Divider Effect Showcase</title>
+  <link rel="stylesheet" href="./torn-divider.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", serif;
+      background: #0d1512;
+      color: #ede6d3;
+      line-height: 1.6;
+    }
+    .section {
+      padding: 80px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero {
+      background-color: #0d1512;
+      color: #ede6d3;
+      padding: 100px 20px;
+    }
+    .cream-section {
+      background-color: #ede6d3;
+      color: #1a2421;
+      padding: 100px 20px;
+    }
+    .emerald-section {
+      background-color: #162a24;
+      color: #ede6d3;
+      padding: 100px 20px;
+    }
+    h1 {
+      font-size: 2.8rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 1rem;
+      font-weight: 300;
+      text-transform: uppercase;
+    }
+    h2 {
+      font-size: 2rem;
+      letter-spacing: 0.04em;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+    p {
+      max-width: 600px;
+      margin: 0 auto 1.5rem auto;
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    .tagline {
+      font-style: italic;
+      font-size: 1.25rem;
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Section 1: Hero (Night Tone #0D1512) -->
+  <section class="hero">
+    <div class="section">
+      <div class="tagline">Fine Art Stationery & Web Experiences</div>
+      <h1>Hand-Torn Paper Transitions</h1>
+      <p>A demonstration of photorealistic torn page dividers rendered cleanly via SVG filters and directional grain noise.</p>
+    </div>
+  </section>
+
+  <!-- Divider 1: Night to Cream (Variant 1: Downward Slope) -->
+  <div class="torn-divider-wrapper" style="background-color: #0D1512; height: 90px;" aria-hidden="true">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" class="torn-divider-svg">
+      <defs>
+        <filter id="tear-v1" x="-5%" y="-15%" width="110%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.16" numOctaves="4" result="noise" seed="48" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" result="tornEdge" />
+        </filter>
+      </defs>
+      <!-- Shadow -->
+      <path d="M -20,24 L 65,22 L 140,32 L 225,27 L 315,39 L 410,33 L 505,46 L 600,40 L 700,52 L 800,45 L 895,57 L 995,49 L 1095,60 L 1220,54"
+            fill="none" stroke="rgba(43, 38, 32, 0.35)" stroke-width="6" class="torn-shadow" transform="translate(0, 3.5)" filter="url(#tear-v1)" />
+      <!-- Cotton Deckle Rim -->
+      <path d="M -20,24 L 65,22 L 140,32 L 225,27 L 315,39 L 410,33 L 505,46 L 600,40 L 700,52 L 800,45 L 895,57 L 995,49 L 1095,60 L 1220,54"
+            fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" filter="url(#tear-v1)" />
+      <!-- Main Sheet Body -->
+      <path d="M -20,24 L 65,22 L 140,32 L 225,27 L 315,39 L 410,33 L 505,46 L 600,40 L 700,52 L 800,45 L 895,57 L 995,49 L 1095,60 L 1220,54 L 1220,115 L -20,115 Z"
+            fill="#EDE6D3" filter="url(#tear-v1)" />
+      <!-- Deckle Whisps & Fringes -->
+      <path d="M -20,24 L 65,22 L 140,32 L 225,27 L 315,39 L 410,33 L 505,46 L 600,40 L 700,52 L 800,45 L 895,57 L 995,49 L 1095,60 L 1220,54"
+            fill="none" stroke="rgba(255, 255, 255, 0.92)" stroke-width="1.8" stroke-dasharray="4 6 1 5 7 3 2 4" stroke-linecap="round" filter="url(#tear-v1)" />
+    </svg>
+  </div>
+
+  <!-- Section 2: Cream Paper Tone (#EDE6D3) -->
+  <section class="cream-section">
+    <div class="section">
+      <h2>The Anatomy of Real Paper</h2>
+      <p>Notice the crisp white exposed cotton pulp rim along the tear line, accompanied by anisotropic micro-fibrils displaced horizontally along the grain.</p>
+    </div>
+  </section>
+
+  <!-- Divider 2: Cream to Deep Emerald (#162A24) (Variant 2: Upward Slope) -->
+  <div class="torn-divider-wrapper" style="background-color: #EDE6D3; height: 90px;" aria-hidden="true">
+    <svg viewBox="0 0 1200 100" preserveAspectRatio="none" class="torn-divider-svg">
+      <defs>
+        <filter id="tear-v2" x="-5%" y="-15%" width="110%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.025 0.16" numOctaves="4" result="noise" seed="85" />
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" xChannelSelector="R" yChannelSelector="G" result="tornEdge" />
+        </filter>
+      </defs>
+      <!-- Shadow (darker against deep emerald) -->
+      <path d="M -20,58 L 80,52 L 170,61 L 265,47 L 360,54 L 460,42 L 560,49 L 665,37 L 770,43 L 875,31 L 980,36 L 1090,26 L 1220,30"
+            fill="none" stroke="rgba(0, 0, 0, 0.65)" stroke-width="6" class="torn-shadow" transform="translate(0, 3.5)" filter="url(#tear-v2)" />
+      <!-- Cotton Deckle Rim -->
+      <path d="M -20,58 L 80,52 L 170,61 L 265,47 L 360,54 L 460,42 L 560,49 L 665,37 L 770,43 L 875,31 L 980,36 L 1090,26 L 1220,30"
+            fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.95" filter="url(#tear-v2)" />
+      <!-- Main Sheet Body -->
+      <path d="M -20,58 L 80,52 L 170,61 L 265,47 L 360,54 L 460,42 L 560,49 L 665,37 L 770,43 L 875,31 L 980,36 L 1090,26 L 1220,30 L 1220,115 L -20,115 Z"
+            fill="#162A24" filter="url(#tear-v2)" />
+      <!-- Deckle Whisps & Fringes -->
+      <path d="M -20,58 L 80,52 L 170,61 L 265,47 L 360,54 L 460,42 L 560,49 L 665,37 L 770,43 L 875,31 L 980,36 L 1090,26 L 1220,30"
+            fill="none" stroke="rgba(255, 255, 255, 0.92)" stroke-width="1.8" stroke-dasharray="4 6 1 5 7 3 2 4" stroke-linecap="round" filter="url(#tear-v2)" />
+    </svg>
+  </div>
+
+  <!-- Section 3: Deep Emerald (#162A24) -->
+  <section class="emerald-section">
+    <div class="section">
+      <h2>Seamless Multi-Section Continuity</h2>
+      <p>Because the SVG scales with preserveAspectRatio="none" and coordinates bleed beyond 0–1200px, dividers fit edge-to-edge on any screen resolution.</p>
+    </div>
+  </section>
+
+</body>
+</html>

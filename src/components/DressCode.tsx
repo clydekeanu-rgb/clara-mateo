@@ -38,7 +38,7 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
             return (
               <div
                 key={index}
-                className="relative group cursor-pointer"
+                className="relative group cursor-pointer focus:outline-none"
                 onMouseEnter={() => setActiveSwatch(index)}
                 onMouseLeave={() => setActiveSwatch(null)}
                 onClick={() => setActiveSwatch(activeSwatch === index ? null : index)}
@@ -46,11 +46,12 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
                 onBlur={() => setActiveSwatch(null)}
                 tabIndex={0}
                 role="button"
+                aria-pressed={isHovered}
                 aria-label={`${swatch.name} — ${swatch.hex}`}
               >
                 {/* Circular Swatch */}
                 <div
-                  className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-115 group-hover:z-30 group-hover:-translate-y-2 relative border focus:outline-none focus:ring-2 focus:ring-emerald-light focus:ring-offset-2 focus:ring-offset-[#0D1512]`}
+                  className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-[1.15] group-hover:z-30 group-hover:-translate-y-2 group-focus:scale-[1.15] group-focus:-translate-y-2 relative border group-focus:ring-2 group-focus:ring-emerald-light group-focus:ring-offset-2 group-focus:ring-offset-[#0D1512]`}
                   style={{
                     backgroundColor: swatch.hex,
                     borderColor: swatch.border || 'rgba(255, 255, 255, 0.25)',
