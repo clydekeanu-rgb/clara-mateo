@@ -33,7 +33,7 @@ export const FloralAccent: React.FC<FloralAccentProps> = ({
     >
       <div className="relative w-full transition-all duration-300 flex justify-center overflow-visible">
         <img
-          src="/floral_bouquet.png"
+          src={`${import.meta.env.BASE_URL}floral_bouquet.png`}
           alt="Emerald green and ivory rose wedding floral garland"
           className="w-full h-auto object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.4)] scale-[1.02]"
           loading="lazy"

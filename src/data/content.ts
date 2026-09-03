@@ -104,8 +104,8 @@ export const weddingContent: WeddingContent = {
   venue_address: "Santa Rosa - Tagaytay Road, Silang, Cavite 4118, Philippines",
   venue_google_maps_url: "https://maps.google.com/?q=Angelfields+Nature+Sanctuary+Tagaytay+Philippines",
   
-  // Curated moody aesthetic photography from Unsplash & couple portrait
-  hero_image: "/Couple_posing_for_portrait_outdoors_202609020934.jpeg",
+  // Curated photography and couple portrait
+  hero_image: `${import.meta.env.BASE_URL}Couple_posing_for_portrait_outdoors_202609020934.jpeg`,
   hero_image_alt: "Mateo & Clara smiling together outdoors in romantic porch setting",
   
   table_setting_image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
@@ -116,35 +116,35 @@ export const weddingContent: WeddingContent = {
   
   gallery_images: [
     {
-      src: "/prenup/Couple_posing_for_photos_2K_2026090320384.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_posing_for_photos_2K_2026090320384.jpeg`,
       alt: "Mateo & Clara walking hand-in-hand and laughing on the sunlit veranda",
     },
     {
-      src: "/prenup/Couple_posing_for_photos_2K_2026090320382.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_posing_for_photos_2K_2026090320382.jpeg`,
       alt: "Intimate forehead embrace framed by gentle garden blossoms",
     },
     {
-      src: "/prenup/Couple_in_photo_collage_mood_2K_20260903204623.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_in_photo_collage_mood_2K_20260903204623.jpeg`,
       alt: "Playful jump together along the open scenic mountain road",
     },
     {
-      src: "/prenup/Couple_posing_for_photos_2K_2026090320381.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_posing_for_photos_2K_2026090320381.jpeg`,
       alt: "Loving embrace beneath the floral garden wedding arch",
     },
     {
-      src: "/prenup/Couple_in_photo_collage_mood_2K_2026090320463.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_in_photo_collage_mood_2K_2026090320463.jpeg`,
       alt: "Golden hour hilltop embrace holding delicate wildflowers",
     },
     {
-      src: "/prenup/232342.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/232342.jpeg`,
       alt: "Joyful laughter as Mateo lifts Clara on the open countryside trail",
     },
     {
-      src: "/prenup/Couple_posing_for_portrait_outdoors_202609031806.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_posing_for_portrait_outdoors_202609031806.jpeg`,
       alt: "Tender moment holding each other in the rustic pavilion with hanging ribbons",
     },
     {
-      src: "/prenup/Couple_posing_for_photos_2K_2026090320383.jpeg",
+      src: `${import.meta.env.BASE_URL}prenup/Couple_posing_for_photos_2K_2026090320383.jpeg`,
       alt: "Sunset glow overlooking the verdant countryside from the porch",
     },
   ],
