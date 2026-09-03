@@ -10,3 +10,8 @@ coverage/
 # Temporary verification screenshots & reports
 screenshot-*.png
 screenshots-*
+
+# Firebase
+.firebase/
+.firebaserc
+
