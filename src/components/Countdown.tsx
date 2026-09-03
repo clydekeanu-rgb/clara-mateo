@@ -59,12 +59,15 @@ export const Countdown: React.FC<CountdownProps> = ({
     <section id="countdown-section" className="relative w-full bg-[#0D1512] dark-texture text-[#F7F3E8] py-12 sm:py-16 px-6 text-center overflow-hidden">
       <div className="max-w-[640px] mx-auto relative z-10">
         {/* Subtitle */}
-        <span className="text-[#9CAF9A] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-2">
+        <span className="reveal-init text-[#9CAF9A] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-2">
           {subtitle}
         </span>
 
         {/* Title */}
-        <h3 className="serif-title text-2xl sm:text-3xl text-[#F7F3E8] font-medium tracking-[0.14em] mb-8 drop-shadow-sm">
+        <h3
+          data-reveal-delay="50"
+          className="reveal-init serif-title text-2xl sm:text-3xl text-[#F7F3E8] font-medium tracking-[0.14em] mb-8 drop-shadow-sm"
+        >
           {title}
         </h3>
 
@@ -73,7 +76,8 @@ export const Countdown: React.FC<CountdownProps> = ({
           {units.map((unit, index) => (
             <div
               key={index}
-              className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xs bg-[#141F1A]/85 border border-[#1B4332]/60 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-xs transition-all duration-300 hover:border-emerald-light/40 hover:-translate-y-0.5"
+              data-reveal-delay={`${100 + index * 60}`}
+              className="reveal-scale-init flex flex-col items-center justify-center p-3 sm:p-4 rounded-xs bg-[#141F1A]/85 border border-[#1B4332]/60 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-xs transition-all duration-300 hover:border-emerald-light/40 hover:-translate-y-0.5"
             >
               <span className="serif-title text-2xl sm:text-3xl md:text-4xl font-medium text-[#F7F3E8] leading-none mb-1.5 tabular-nums">
                 {String(unit.value).padStart(2, '0')}
@@ -86,7 +90,10 @@ export const Countdown: React.FC<CountdownProps> = ({
         </div>
 
         {/* Delicate Heart Flourish */}
-        <div className="flex items-center justify-center space-x-3 mt-10 text-[#EDE6D3]/30">
+        <div
+          data-reveal-delay="360"
+          className="reveal-scale-init flex items-center justify-center space-x-3 mt-10 text-[#EDE6D3]/30"
+        >
           <span className="w-10 h-[1px] bg-[#EDE6D3]/25" />
           <Heart className="w-3.5 h-3.5 fill-[#EDE6D3]/15 text-[#EDE6D3]/40" />
           <span className="w-10 h-[1px] bg-[#EDE6D3]/25" />

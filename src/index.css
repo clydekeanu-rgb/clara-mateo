@@ -66,6 +66,54 @@ body {
   font-family: var(--font-script);
 }
 
+/* Motion & Micro-interaction Tokens (Emil Kowalski standards) */
+:root {
+  --ease-out-emil: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Tactile press feedback on interactive elements */
+.btn-press {
+  transition: transform 160ms var(--ease-out-emil), background-color 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-press:hover {
+    transform: translateY(-1px);
+  }
+}
+
+.btn-press:active {
+  transform: scale(0.97) !important;
+}
+
+/* Bidirectional Scroll Reveal: Fade + subtle TranslateY (skip layout, GPU only) */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 550ms var(--ease-out-emil), transform 550ms var(--ease-out-emil);
+  will-change: opacity, transform;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Bidirectional Scale Reveal (starts from natural 0.94, never 0) */
+.reveal-scale-init {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 500ms var(--ease-out-emil), transform 500ms var(--ease-out-emil);
+  will-change: opacity, transform;
+}
+
+.reveal-scale-visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
 /* Elegant Dark Film Grain Filter */
 .grain {
   position: fixed;

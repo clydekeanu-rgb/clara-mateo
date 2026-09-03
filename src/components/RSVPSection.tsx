@@ -76,30 +76,39 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
     <section className="relative w-full bg-[#0D1512] dark-texture text-[#F7F3E8] pt-20 sm:pt-28 md:pt-32 pb-24 sm:pb-32 px-6 overflow-hidden">
       <div className="max-w-[640px] mx-auto text-center relative z-10">
         {/* Section Subtitle */}
-        <span className="text-[#9CAF9A] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-3">
+        <span className="reveal-init text-[#9CAF9A] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-3">
           {content.rsvp_subtitle}
         </span>
 
         {/* Section Heading */}
-        <h2 className="serif-title text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.15em] mb-4">
+        <h2
+          data-reveal-delay="50"
+          className="reveal-init serif-title text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.15em] mb-4"
+        >
           {content.rsvp_heading}
         </h2>
 
         {/* Date & Time Recap */}
-        <div className="inline-flex items-center justify-center space-x-2 text-emerald-light text-xs sm:text-sm serif-title tracking-wider mb-6">
+        <div
+          data-reveal-delay="90"
+          className="reveal-init inline-flex items-center justify-center space-x-2 text-emerald-light text-xs sm:text-sm serif-title tracking-wider mb-6"
+        >
           <span>{content.event_date}</span>
           <span className="opacity-60">•</span>
           <span>{content.event_time_ceremony}</span>
         </div>
 
         {/* Instruction copy */}
-        <p className="font-body text-base sm:text-lg text-[#F7F3E8]/85 leading-relaxed font-light mb-12 max-w-lg mx-auto">
+        <p
+          data-reveal-delay="130"
+          className="reveal-init font-body text-base sm:text-lg text-[#F7F3E8]/85 leading-relaxed font-light mb-12 max-w-lg mx-auto"
+        >
           {content.rsvp_instructions}
         </p>
 
         {/* In-page RSVP Form or Success State */}
         {status === 'success' ? (
-          <div className="bg-[#141F1A]/90 border border-[#1B4332] rounded-xs p-8 sm:p-12 text-center shadow-xl relative backdrop-blur-xs">
+          <div className="reveal-scale-init bg-[#141F1A]/90 border border-[#1B4332] rounded-xs p-8 sm:p-12 text-center shadow-xl relative backdrop-blur-xs">
             <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#1B4332]/40 text-emerald-light border border-emerald-light/30 mb-6">
               <CheckCircle2 className="w-8 h-8" />
             </div>
@@ -117,7 +126,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
             <button
               type="button"
               onClick={handleEditResponse}
-              className="text-[11px] sm:text-xs serif-title uppercase tracking-widest text-[#9CAF9A] hover:text-[#F7F3E8] underline transition-colors cursor-pointer"
+              className="btn-press text-[11px] sm:text-xs serif-title uppercase tracking-widest text-[#9CAF9A] hover:text-[#F7F3E8] underline transition-colors cursor-pointer"
             >
               Update or Change Response
             </button>
@@ -125,7 +134,8 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
         ) : (
           <form
             onSubmit={handleSubmit}
-            className="bg-[#141F1A]/90 border border-[#1B4332] rounded-xs p-6 sm:p-10 text-left shadow-2xl backdrop-blur-xs space-y-6"
+            data-reveal-delay="160"
+            className="reveal-scale-init bg-[#141F1A]/90 border border-[#1B4332] rounded-xs p-6 sm:p-10 text-left shadow-2xl backdrop-blur-xs space-y-6"
             noValidate
           >
             {/* Error banner */}
@@ -170,25 +180,25 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   type="button"
                   aria-pressed={formData.attending === 'yes'}
                   onClick={() => setFormData({ ...formData, attending: 'yes' })}
-                  className={`py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
+                  className={`btn-press py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
                     formData.attending === 'yes'
                       ? 'bg-[#1B4332] border-emerald-light text-[#F7F3E8] shadow-[0_0_12px_rgba(27,67,50,0.5)]'
-                      : 'bg-[#0D1512]/60 border-[#1B4332]/60 text-[#F7F3E8]/70 hover:border-emerald-light/50'
+                      : 'bg-[#0D1512]/80 border-[#1B4332]/60 text-[#F7F3E8]/60 hover:text-[#F7F3E8] hover:border-[#1B4332]'
                   }`}
                 >
-                  Joyfully Accepts
+                  Joyfully Accept
                 </button>
                 <button
                   type="button"
                   aria-pressed={formData.attending === 'no'}
                   onClick={() => setFormData({ ...formData, attending: 'no' })}
-                  className={`py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
+                  className={`btn-press py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
                     formData.attending === 'no'
                       ? 'bg-[#1B4332] border-emerald-light text-[#F7F3E8] shadow-[0_0_12px_rgba(27,67,50,0.5)]'
-                      : 'bg-[#0D1512]/60 border-[#1B4332]/60 text-[#F7F3E8]/70 hover:border-emerald-light/50'
+                      : 'bg-[#0D1512]/80 border-[#1B4332]/60 text-[#F7F3E8]/60 hover:text-[#F7F3E8] hover:border-[#1B4332]'
                   }`}
                 >
-                  Regretfully Declines
+                  Regretfully Decline
                 </button>
               </div>
             </div>
@@ -274,7 +284,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="w-full sm:w-auto min-w-[200px] inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#1B4332] hover:bg-[#255a43] border border-emerald-light/40 text-[#F7F3E8] serif-title text-xs sm:text-sm tracking-[0.2em] uppercase rounded-xs transition-all duration-300 shadow-lg hover:shadow-[#1B4332]/40 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                className="btn-press w-full sm:w-auto min-w-[200px] inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#1B4332] hover:bg-[#255a43] border border-emerald-light/40 text-[#F7F3E8] serif-title text-xs sm:text-sm tracking-[0.2em] uppercase rounded-xs transition-all duration-300 shadow-lg hover:shadow-[#1B4332]/40 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
               >
                 {status === 'submitting' ? (
                   <span>Sending RSVP...</span>
@@ -290,12 +300,15 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
         )}
 
         {/* Closing Line in Script */}
-        <p className="script-font text-4xl sm:text-5xl md:text-6xl text-[#F7F3E8]/95 tracking-wide mt-16 sm:mt-20 leading-tight">
+        <p
+          data-reveal-delay="100"
+          className="reveal-init script-font text-4xl sm:text-5xl md:text-6xl text-[#F7F3E8]/95 tracking-wide mt-16 sm:mt-20 leading-tight"
+        >
           "{content.rsvp_closing_script}"
         </p>
 
         {/* Floral Cluster at the bottom */}
-        <div className="mt-12 sm:mt-16 flex justify-center">
+        <div data-reveal-delay="180" className="reveal-scale-init mt-12 sm:mt-16 flex justify-center">
           <FloralAccent position="bottom-rsvp" size="lg" />
         </div>
 

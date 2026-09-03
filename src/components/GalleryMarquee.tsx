@@ -159,7 +159,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
 
       {/* Marquee Carousel Container */}
       <div
-        className="relative w-full py-8 sm:py-12 overflow-hidden"
+        className="reveal-init relative w-full py-8 sm:py-12 overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={() => setIsPaused(true)}

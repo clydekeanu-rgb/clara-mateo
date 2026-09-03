@@ -10,9 +10,11 @@ import { LocationSection } from './components/LocationSection';
 import { DetailsSection } from './components/DetailsSection';
 import { RSVPSection } from './components/RSVPSection';
 import { TornDivider } from './components/TornDivider';
+import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
   const content = weddingContent;
+  useScrollReveal();
 
   return (
     <main

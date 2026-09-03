@@ -14,20 +14,26 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
       {/* Content wrapper constrained to ~680px */}
       <div className="max-w-[680px] mx-auto px-6 mb-12 sm:mb-16">
         {/* Subtle decorative divider */}
-        <div className="w-16 h-[1px] bg-emerald-accent/40 mx-auto mb-12" />
+        <div className="reveal-scale-init w-16 h-[1px] bg-emerald-accent/40 mx-auto mb-12" />
 
         {/* Section Subtitle */}
-        <span className="text-sage text-xs sm:text-sm tracking-[0.3em] uppercase serif-title block mb-3">
+        <span className="reveal-init text-sage text-xs sm:text-sm tracking-[0.3em] uppercase serif-title block mb-3">
           {content.dress_code_subtitle}
         </span>
 
         {/* Section Heading */}
-        <h2 className="serif-title font-bold text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.15em] mb-6">
+        <h2
+          data-reveal-delay="50"
+          className="reveal-init serif-title font-bold text-3xl sm:text-4xl md:text-5xl text-[#F7F3E8] font-normal tracking-[0.15em] mb-6"
+        >
           {content.dress_code_heading}
         </h2>
 
         {/* Intro sentence */}
-        <p className="font-body text-lg sm:text-xl text-ivory/85 leading-relaxed font-light mb-10 max-w-md mx-auto">
+        <p
+          data-reveal-delay="90"
+          className="reveal-init font-body text-lg sm:text-xl text-ivory/85 leading-relaxed font-light mb-10 max-w-md mx-auto"
+        >
           {content.dress_code_intro}
         </p>
 
@@ -38,7 +44,8 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
             return (
               <div
                 key={index}
-                className="relative group cursor-pointer focus:outline-none"
+                data-reveal-delay={`${120 + index * 60}`}
+                className="reveal-scale-init relative group cursor-pointer focus:outline-hidden"
                 onMouseEnter={() => setActiveSwatch(index)}
                 onMouseLeave={() => setActiveSwatch(null)}
                 onClick={() => setActiveSwatch(activeSwatch === index ? null : index)}
@@ -49,9 +56,9 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
                 aria-pressed={isHovered}
                 aria-label={`${swatch.name} — ${swatch.hex}`}
               >
-                {/* Circular Swatch */}
+                {/* Circular Swatch with Spring Scale */}
                 <div
-                  className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-[1.15] group-hover:z-30 group-hover:-translate-y-2 group-focus:scale-[1.15] group-focus:-translate-y-2 relative border group-focus:ring-2 group-focus:ring-emerald-light group-focus:ring-offset-2 group-focus:ring-offset-[#0D1512]`}
+                  className={`w-14 h-14 sm:w-18 sm:h-18 md:w-20 md:h-20 rounded-full shadow-lg transition-all duration-300 transform group-hover:scale-[1.18] group-hover:z-30 group-hover:-translate-y-2 group-active:scale-95 group-focus:scale-[1.18] group-focus:-translate-y-2 relative border group-focus:ring-2 group-focus:ring-emerald-light group-focus:ring-offset-2 group-focus:ring-offset-[#0D1512]`}
                   style={{
                     backgroundColor: swatch.hex,
                     borderColor: swatch.border || 'rgba(255, 255, 255, 0.25)',
@@ -61,8 +68,8 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
 
                 {/* Swatch Label Tooltip */}
                 <div
-                  className={`absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded bg-[#141F1A] border border-emerald-deep/60 text-[#F7F3E8] text-xs serif-title tracking-wider uppercase transition-all duration-200 pointer-events-none shadow-md ${
-                    isHovered ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-1'
+                  className={`absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded-xs bg-[#141F1A] border border-emerald-deep/60 text-[#F7F3E8] text-xs serif-title tracking-wider uppercase transition-all duration-200 pointer-events-none shadow-md ${
+                    isHovered ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-1 scale-95'
                   }`}
                 >
                   {swatch.name}
@@ -73,7 +80,10 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
         </div>
 
         {/* Swatch Names Guide */}
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 mt-10 text-xs sm:text-sm text-sage/80 serif-title tracking-widest uppercase">
+        <div
+          data-reveal-delay="240"
+          className="reveal-init flex flex-wrap justify-center gap-x-4 gap-y-2 mt-10 text-xs sm:text-sm text-sage/80 serif-title tracking-widest uppercase"
+        >
           {content.dress_code_swatches.map((swatch, i) => (
             <span key={i} className="inline-flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full border border-white/20" style={{ backgroundColor: swatch.hex }} />
@@ -83,7 +93,10 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
           ))}
         </div>
 
-        <p className="font-body italic text-base sm:text-lg text-ivory/70 mt-6 font-light">
+        <p
+          data-reveal-delay="280"
+          className="reveal-init font-body italic text-base sm:text-lg text-ivory/70 mt-6 font-light"
+        >
           Formal &amp; Black-Tie Optional. We kindly encourage attire inspired by these natural evening tones.
         </p>
       </div>

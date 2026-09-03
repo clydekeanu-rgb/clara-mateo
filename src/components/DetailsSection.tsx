@@ -14,12 +14,15 @@ export const DetailsSection: React.FC<DetailsSectionProps> = ({ content }) => {
         <div className="w-16 h-[1px] bg-[#1B4332]/25 mx-auto mb-12" />
 
         {/* Section Subtitle */}
-        <span className="text-[#574F44] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-3">
+        <span className="reveal-init text-[#574F44] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-3">
           {content.details_subtitle}
         </span>
 
         {/* Section Heading */}
-        <h2 className="serif-title text-3xl sm:text-4xl md:text-5xl text-[#1B4332] font-normal tracking-[0.15em] mb-14">
+        <h2
+          data-reveal-delay="50"
+          className="reveal-init serif-title text-3xl sm:text-4xl md:text-5xl text-[#1B4332] font-normal tracking-[0.15em] mb-14"
+        >
           {content.details_heading}
         </h2>
 
@@ -42,7 +45,8 @@ export const DetailsSection: React.FC<DetailsSectionProps> = ({ content }) => {
           ).map((card, idx) => (
             <div
               key={idx}
-              className="relative p-8 sm:p-10 rounded-xs bg-[#F7F3E8] border border-[#1B4332]/20 shadow-xs transition-all duration-300 hover:border-[#1B4332]/45 hover:shadow-sm"
+              data-reveal-delay={`${100 + idx * 80}`}
+              className="reveal-scale-init relative p-8 sm:p-10 rounded-xs bg-[#F7F3E8] border border-[#1B4332]/20 shadow-xs transition-all duration-300 hover:border-[#1B4332]/45 hover:shadow-sm hover:-translate-y-1"
             >
               <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/15 mb-4">
                 {card.icon === 'gift' ? (
