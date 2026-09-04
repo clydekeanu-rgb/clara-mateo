@@ -48,14 +48,42 @@ export default function App() {
           {/* Section 2.7: Gallery Marquee (Pure Black #000000 background) */}
           <GalleryMarquee images={content.gallery_images} />
 
-          {/* Transition: Black Gallery to Cream Timing */}
-          <TornDivider
-            fromColor="#000000"
-            toColor="#EDE6D3"
-            flipped={false}
-            variant={2}
-            height={80}
-          />
+          {/* Transition: Black Gallery to Cream Timing with Symmetrical Floral Flanks */}
+          <div className="relative w-full">
+            <TornDivider
+              fromColor="#000000"
+              toColor="#EDE6D3"
+              flipped={false}
+              variant={2}
+              height={80}
+            />
+
+            {/* Left Floral Flank (Overlapping bottom ~25% of Gallery and cascading onto Torn Paper) */}
+            <div
+              className="absolute -top-16 sm:-top-24 md:-top-32 left-0 z-30 pointer-events-none select-none w-28 sm:w-40 md:w-52 lg:w-64 max-w-[40vw] overflow-visible"
+              aria-hidden="true"
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}floral_flank.png`}
+                alt=""
+                className="w-full h-auto object-contain drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Right Floral Flank (Mirrored) */}
+            <div
+              className="absolute -top-16 sm:-top-24 md:-top-32 right-0 z-30 pointer-events-none select-none w-28 sm:w-40 md:w-52 lg:w-64 max-w-[40vw] overflow-visible"
+              aria-hidden="true"
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}floral_flank.png`}
+                alt=""
+                className="w-full h-auto object-contain scale-x-[-1] drop-shadow-[0_12px_24px_rgba(0,0,0,0.5)]"
+                loading="lazy"
+              />
+            </div>
+          </div>
 
           {/* Section 3: Timing (Cream background) */}
           <Timing content={content} />
