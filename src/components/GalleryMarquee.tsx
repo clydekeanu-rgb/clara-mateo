@@ -81,11 +81,10 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
 
         // Dynamic scale: 0.92 at edge to 1.18 at center
         const scale = 0.92 + proximity * 0.26;
-        const opacity = 0.65 + proximity * 0.35;
-        const zIndex = Math.round(proximity * 10);
+        const zIndex = 20 + Math.round(proximity * 10);
 
         card.style.transform = `scale(${scale.toFixed(3)})`;
-        card.style.opacity = opacity.toFixed(2);
+        card.style.opacity = '1';
         card.style.zIndex = `${zIndex}`;
         if (proximity > 0.6) {
           card.classList.add('shadow-[0_22px_50px_rgba(0,0,0,0.95)]', 'ring-1', 'ring-emerald-light/40');
@@ -178,8 +177,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
-        {/* Subtle Edge Vignettes to softly fade edges into the black background */}
-        <div className="absolute inset-y-0 left-0 w-12 sm:w-20 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+        {/* Subtle Right Edge Vignette only — left removed so flower is completely clear and unshaded */}
         <div className="absolute inset-y-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
 
         {/* Scrollable Track (z-20: glides ON TOP of the floral flank) */}
