@@ -148,7 +148,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
   return (
     <section
       id="gallery-section"
-      className="relative z-20 w-full bg-black text-[#F7F3E8] select-none"
+      className="relative z-30 w-full bg-black text-[#F7F3E8] select-none"
       aria-label="Photo Gallery"
     >
       {/* Smooth Gradient Transition from Countdown (#0D1512) to Black (#000000) */}

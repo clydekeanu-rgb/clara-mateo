@@ -80,6 +80,7 @@ export default function App() {
             flipped={false}
             variant={2}
             height={80}
+            className="!z-10"
           />
 
           {/* Section 3: Timing (Cream background) */}
