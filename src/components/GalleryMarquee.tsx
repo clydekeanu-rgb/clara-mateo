@@ -148,7 +148,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
   return (
     <section
       id="gallery-section"
-      className="relative w-full bg-black text-[#F7F3E8] overflow-hidden select-none"
+      className="relative w-full bg-black text-[#F7F3E8] select-none"
       aria-label="Photo Gallery"
     >
       {/* Smooth Gradient Transition from Countdown (#0D1512) to Black (#000000) */}
@@ -156,6 +156,19 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         className="w-full h-16 sm:h-24 bg-gradient-to-b from-[#0D1512] via-[#060A08] to-black pointer-events-none"
         aria-hidden="true"
       />
+
+      {/* Top-Left Floral Flank (Underneath the Marquee Cards: cards glide ON TOP) */}
+      <div
+        className="absolute -bottom-24 sm:-bottom-36 md:-bottom-48 left-0 z-0 pointer-events-none select-none w-44 sm:w-64 md:w-80 lg:w-[26rem] max-w-[48vw] overflow-visible"
+        aria-hidden="true"
+      >
+        <img
+          src={`${import.meta.env.BASE_URL}floral_flank.png`}
+          alt=""
+          className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.5)]"
+          loading="lazy"
+        />
+      </div>
 
       {/* Marquee Carousel Container */}
       <div
@@ -169,10 +182,10 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         <div className="absolute inset-y-0 left-0 w-12 sm:w-20 bg-gradient-to-r from-black to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-black to-transparent z-20 pointer-events-none" />
 
-        {/* Scrollable Track */}
+        {/* Scrollable Track (z-10: glides ON TOP of the floral flank) */}
         <div
           ref={containerRef}
-          className="flex items-center gap-4 sm:gap-6 overflow-x-hidden no-scrollbar px-6 py-6 will-change-transform cursor-grab active:cursor-grabbing"
+          className="relative z-10 flex items-center gap-4 sm:gap-6 overflow-x-hidden no-scrollbar px-6 py-6 will-change-transform cursor-grab active:cursor-grabbing"
           style={{ scrollBehavior: 'auto' }}
         >
           {displayPhotos.map((photo, index) => {

@@ -8,7 +8,7 @@ interface TimingProps {
 
 export const Timing: React.FC<TimingProps> = ({ content }) => {
   return (
-    <section className="relative w-full bg-cream paper-texture text-ink pt-16 sm:pt-24 pb-16 sm:pb-24 overflow-hidden">
+    <section className="relative w-full bg-cream paper-texture text-ink pt-16 sm:pt-24 pb-16 sm:pb-24">
       <div className="w-full max-w-[680px] mx-auto px-6 text-center">
         {/* Section Subtitle */}
         <span className="reveal-init text-[#574F44] text-xs sm:text-sm tracking-[0.25em] uppercase serif-title block mb-3">
@@ -53,19 +53,6 @@ export const Timing: React.FC<TimingProps> = ({ content }) => {
             </div>
           ))}
         </div>
-      </div>
-
-      {/* Right Floral Flank Spray (80% larger, inverted rotate-180, positioned at ~3/4 area vertically) */}
-      <div
-        className="absolute top-[72%] -translate-y-1/2 right-0 z-10 pointer-events-none select-none w-44 sm:w-64 md:w-80 lg:w-[26rem] max-w-[45vw] overflow-visible"
-        aria-hidden="true"
-      >
-        <img
-          src={`${import.meta.env.BASE_URL}floral_flank.png`}
-          alt=""
-          className="w-full h-auto object-contain rotate-180 drop-shadow-[0_16px_32px_rgba(0,0,0,0.25)]"
-          loading="lazy"
-        />
       </div>
     </section>
   );

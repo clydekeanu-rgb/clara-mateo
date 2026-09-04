@@ -48,41 +48,41 @@ export default function App() {
           {/* Section 2.7: Gallery Marquee (Pure Black #000000 background) */}
           <GalleryMarquee images={content.gallery_images} />
 
-          {/* Transition: Black Gallery to Cream Timing with Left Floral Flank */}
+          {/* Transition: Black Gallery to Cream Timing */}
+          <TornDivider
+            fromColor="#000000"
+            toColor="#EDE6D3"
+            flipped={false}
+            variant={2}
+            height={80}
+          />
+
+          {/* Section 3: Timing (Cream background) */}
+          <Timing content={content} />
+
+          {/* Transition: Cream Timing (Program) to Dress Code with Right Floral Flank */}
           <div className="relative w-full">
             <TornDivider
-              fromColor="#000000"
-              toColor="#EDE6D3"
+              fromColor="#EDE6D3"
+              toColor="#0D1512"
               flipped={false}
-              variant={2}
+              variant={1}
               height={80}
             />
 
-            {/* Left Floral Flank (80% larger, overlapping bottom ~25% of Gallery cards and cascading onto Torn Paper) */}
+            {/* Right Floral Flank (In between Program and Dress Code sections) */}
             <div
-              className="absolute -top-24 sm:-top-36 md:-top-48 left-0 z-30 pointer-events-none select-none w-44 sm:w-64 md:w-80 lg:w-[26rem] max-w-[48vw] overflow-visible"
+              className="absolute -top-24 sm:-top-36 md:-top-48 right-0 z-20 pointer-events-none select-none w-44 sm:w-64 md:w-80 lg:w-[26rem] max-w-[48vw] overflow-visible"
               aria-hidden="true"
             >
               <img
                 src={`${import.meta.env.BASE_URL}floral_flank.png`}
                 alt=""
-                className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.5)]"
+                className="w-full h-auto object-contain rotate-180 drop-shadow-[0_16px_32px_rgba(0,0,0,0.35)]"
                 loading="lazy"
               />
             </div>
           </div>
-
-          {/* Section 3: Timing (Cream background) */}
-          <Timing content={content} />
-
-          {/* Transition: Cream Timing to Black Dress Code */}
-          <TornDivider
-            fromColor="#EDE6D3"
-            toColor="#0D1512"
-            flipped={false}
-            variant={1}
-            height={80}
-          />
 
           {/* Section 4: Dress Code (Black/Night background) */}
           <DressCode content={content} />
