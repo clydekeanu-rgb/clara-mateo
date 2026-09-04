@@ -73,29 +73,14 @@ export default function App() {
           {/* Section 2.7: Gallery Marquee (Pure Black #000000 background) */}
           <GalleryMarquee images={content.gallery_images} />
 
-          {/* Transition: Black Gallery to Cream Timing (Program) with Left Floral Flank */}
-          <div className="relative w-full">
-            <TornDivider
-              fromColor="#000000"
-              toColor="#EDE6D3"
-              flipped={false}
-              variant={2}
-              height={80}
-            />
-
-            {/* Left Floral Flank (In between Gallery and Program: 25% sits on Gallery, 75% sits on Program) */}
-            <div
-              className="absolute top-0 -translate-y-1/4 left-0 z-20 pointer-events-none select-none w-44 sm:w-64 md:w-80 lg:w-[26rem] max-w-[48vw] overflow-visible"
-              aria-hidden="true"
-            >
-              <img
-                src={`${import.meta.env.BASE_URL}floral_flank.png`}
-                alt=""
-                className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.45)]"
-                loading="lazy"
-              />
-            </div>
-          </div>
+          {/* Transition: Black Gallery to Cream Timing (Program) */}
+          <TornDivider
+            fromColor="#000000"
+            toColor="#EDE6D3"
+            flipped={false}
+            variant={2}
+            height={80}
+          />
 
           {/* Section 3: Timing (Cream background) */}
           <Timing content={content} />
