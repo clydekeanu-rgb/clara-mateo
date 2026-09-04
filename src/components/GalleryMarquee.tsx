@@ -53,18 +53,34 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
     },
   ];
 
-  // Triplicate list for infinite seamless marquee loop
-  const displayPhotos = [...photoList, ...photoList, ...photoList];
+  // Triplicate lists for infinite seamless marquee loop
+  // Row 1: Original order
+  const displayPhotosRow1 = [...photoList, ...photoList, ...photoList];
+  // Row 2: Alternating offset/reversed order for rich variety
+  const photoListRow2 = [
+    photoList[4],
+    photoList[5],
+    photoList[6],
+    photoList[7],
+    photoList[0],
+    photoList[1],
+    photoList[2],
+    photoList[3],
+  ];
+  const displayPhotosRow2 = [...photoListRow2, ...photoListRow2, ...photoListRow2];
 
-  // Auto-scroll loop with center detection
+  const row1Ref = useRef<HTMLDivElement>(null);
+  const row2Ref = useRef<HTMLDivElement>(null);
+  const scrollPosRow1 = useRef(0);
+  const scrollPosRow2 = useRef(0);
+  const row2Initialized = useRef(false);
+
+  // Auto-scroll loop with center detection for both rows
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
     let lastTimestamp = performance.now();
-    const speed = 0.55; // Pixels per frame at 60fps
+    const speed = 0.5; // Pixels per frame at 60fps
 
-    const updateCenterCards = () => {
+    const updateCenterCards = (container: HTMLDivElement | null) => {
       if (!container) return;
       const containerRect = container.getBoundingClientRect();
       const containerCenterX = containerRect.left + containerRect.width / 2;
@@ -79,18 +95,18 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         // Calculate proximity ratio: 1.0 at center, 0 at edges
         const proximity = Math.max(0, 1 - distFromCenter / maxDist);
 
-        // Dynamic scale: 0.92 at edge to 1.18 at center
-        const scale = 0.92 + proximity * 0.26;
+        // Elegant subtle scale: 0.94 at edge to 1.08 at center
+        const scale = 0.94 + proximity * 0.14;
         const zIndex = 20 + Math.round(proximity * 10);
 
         card.style.transform = `scale(${scale.toFixed(3)})`;
         card.style.opacity = '1';
         card.style.zIndex = `${zIndex}`;
         if (proximity > 0.6) {
-          card.classList.add('shadow-[0_22px_50px_rgba(0,0,0,0.95)]', 'ring-1', 'ring-emerald-light/40');
+          card.classList.add('shadow-[0_20px_45px_rgba(0,0,0,0.95)]', 'ring-1', 'ring-emerald-light/40');
           card.classList.remove('shadow-[0_10px_25px_rgba(0,0,0,0.7)]');
         } else {
-          card.classList.remove('shadow-[0_22px_50px_rgba(0,0,0,0.95)]', 'ring-1', 'ring-emerald-light/40');
+          card.classList.remove('shadow-[0_20px_45px_rgba(0,0,0,0.95)]', 'ring-1', 'ring-emerald-light/40');
           card.classList.add('shadow-[0_10px_25px_rgba(0,0,0,0.7)]');
         }
       });
@@ -99,19 +115,42 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
     const animate = (timestamp: number) => {
       const delta = timestamp - lastTimestamp;
       lastTimestamp = timestamp;
+      const step = speed * (delta / 16.67);
 
-      if (!isPaused && container) {
-        scrollPosRef.current += (speed * (delta / 16.67));
-        const halfScroll = container.scrollWidth / 3;
+      const row1 = row1Ref.current;
+      const row2 = row2Ref.current;
 
-        if (scrollPosRef.current >= halfScroll) {
-          scrollPosRef.current -= halfScroll;
-        }
-
-        container.scrollLeft = scrollPosRef.current;
+      // Initialize Row 2 scroll position to 1/3 scrollWidth so it scrolls backwards cleanly
+      if (row2 && !row2Initialized.current && row2.scrollWidth > 0) {
+        scrollPosRow2.current = row2.scrollWidth / 3;
+        row2.scrollLeft = scrollPosRow2.current;
+        row2Initialized.current = true;
       }
 
-      updateCenterCards();
+      if (!isPaused) {
+        // Row 1: moves LEFTWARD (scrollLeft increases)
+        if (row1) {
+          scrollPosRow1.current += step;
+          const oneThird1 = row1.scrollWidth / 3;
+          if (oneThird1 > 0 && scrollPosRow1.current >= oneThird1) {
+            scrollPosRow1.current -= oneThird1;
+          }
+          row1.scrollLeft = scrollPosRow1.current;
+        }
+
+        // Row 2: moves RIGHTWARD (scrollLeft decreases)
+        if (row2 && row2Initialized.current) {
+          scrollPosRow2.current -= step;
+          const oneThird2 = row2.scrollWidth / 3;
+          if (oneThird2 > 0 && scrollPosRow2.current <= 0) {
+            scrollPosRow2.current += oneThird2;
+          }
+          row2.scrollLeft = scrollPosRow2.current;
+        }
+      }
+
+      updateCenterCards(row1);
+      updateCenterCards(row2);
       animFrameIdRef.current = requestAnimationFrame(animate);
     };
 
@@ -122,7 +161,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         cancelAnimationFrame(animFrameIdRef.current);
       }
     };
-  }, [isPaused, displayPhotos.length]);
+  }, [isPaused, photoList]);
 
   // Handle keyboard navigation for lightbox
   const handleKeyDown = useCallback(
@@ -169,36 +208,81 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         />
       </div>
 
-      {/* Marquee Carousel Container (z-20: cards glide ON TOP of the bouquet) */}
+      {/* Dual Marquee Container (z-20: cards glide ON TOP of the bouquet) */}
       <div
-        className="reveal-init relative z-20 w-full py-8 sm:py-12 overflow-hidden"
+        className="reveal-init relative z-20 w-full py-6 sm:py-10 space-y-4 sm:space-y-6 overflow-hidden"
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={() => setIsPaused(true)}
         onTouchEnd={() => setIsPaused(false)}
       >
         {/* Subtle Right Edge Vignette only — left removed so flower is completely clear and unshaded */}
-        <div className="absolute inset-y-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
+        <div className="absolute inset-y-0 right-0 w-12 sm:w-20 bg-gradient-to-l from-black to-transparent z-30 pointer-events-none" />
 
-        {/* Scrollable Track (z-20: glides ON TOP of the floral flank) */}
+        {/* Row 1: Scrolling Leftward */}
         <div
-          ref={containerRef}
-          className="relative z-20 flex items-center gap-4 sm:gap-6 overflow-x-hidden no-scrollbar px-6 py-6 will-change-transform cursor-grab active:cursor-grabbing"
+          ref={row1Ref}
+          className="relative z-20 flex items-center gap-3.5 sm:gap-5 overflow-x-hidden no-scrollbar px-6 py-2 will-change-transform cursor-grab active:cursor-grabbing"
           style={{ scrollBehavior: 'auto' }}
         >
-          {displayPhotos.map((photo, index) => {
+          {displayPhotosRow1.map((photo, index) => {
             const originalIndex = index % photoList.length;
             return (
               <div
-                key={`${originalIndex}-${index}`}
+                key={`r1-${originalIndex}-${index}`}
                 onClick={() => setSelectedImage(originalIndex)}
-                className="gallery-card shrink-0 w-48 sm:w-56 md:w-60 bg-[#FAF8F5] px-3 pt-4 pb-12 sm:px-3.5 sm:pt-5 sm:pb-14 rounded-xs border border-[#E5E0D8] shadow-[0_10px_25px_rgba(0,0,0,0.7)] cursor-pointer transition-[transform,opacity,box-shadow] duration-200 group relative select-none"
+                className="gallery-card shrink-0 w-38 sm:w-48 md:w-52 bg-[#FAF8F5] px-2.5 pt-3 pb-8 sm:px-3 sm:pt-4 sm:pb-10 rounded-xs border border-[#E5E0D8] shadow-[0_10px_25px_rgba(0,0,0,0.7)] cursor-pointer transition-[transform,opacity,box-shadow] duration-200 group relative select-none"
                 role="button"
                 tabIndex={0}
                 aria-label={`View photo ${originalIndex + 1}: ${photo.alt}`}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     setSelectedImage(originalIndex);
+                  }
+                }}
+              >
+                {/* 1:1 Square Photo Area */}
+                <div className="w-full aspect-square relative overflow-hidden bg-[#1c1c1c] border border-black/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 pointer-events-none"
+                    loading="lazy"
+                  />
+                  {/* Subtle Emulsion Sheen */}
+                  <div className="absolute inset-0 bg-black/5 group-hover:bg-transparent transition-colors duration-300" />
+                  
+                  {/* Hover Zoom Icon */}
+                  <div className="absolute bottom-2 right-2 p-1.5 rounded-full bg-black/60 text-white/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 backdrop-blur-xs">
+                    <ZoomIn className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Row 2: Scrolling Rightward */}
+        <div
+          ref={row2Ref}
+          className="relative z-20 flex items-center gap-3.5 sm:gap-5 overflow-x-hidden no-scrollbar px-6 py-2 will-change-transform cursor-grab active:cursor-grabbing"
+          style={{ scrollBehavior: 'auto' }}
+        >
+          {displayPhotosRow2.map((photo, index) => {
+            // Find the original photo index in photoList for proper modal display
+            const origIndex = photoList.findIndex((p) => p.src === photo.src);
+            const photoIndex = origIndex !== -1 ? origIndex : index % photoList.length;
+            return (
+              <div
+                key={`r2-${photoIndex}-${index}`}
+                onClick={() => setSelectedImage(photoIndex)}
+                className="gallery-card shrink-0 w-38 sm:w-48 md:w-52 bg-[#FAF8F5] px-2.5 pt-3 pb-8 sm:px-3 sm:pt-4 sm:pb-10 rounded-xs border border-[#E5E0D8] shadow-[0_10px_25px_rgba(0,0,0,0.7)] cursor-pointer transition-[transform,opacity,box-shadow] duration-200 group relative select-none"
+                role="button"
+                tabIndex={0}
+                aria-label={`View photo ${photoIndex + 1}: ${photo.alt}`}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    setSelectedImage(photoIndex);
                   }
                 }}
               >

@@ -105,10 +105,10 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
             isTextFaded ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <span className="serif-title text-[11px] sm:text-xs tracking-[0.35em] uppercase text-[#E5D7B7] block mb-1 drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)]">
+          <span className="serif-title text-[11px] sm:text-xs tracking-[0.35em] uppercase text-white font-medium block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_12px_rgba(0,0,0,0.85)]">
             You Are Cordially Invited
           </span>
-          <h1 className="script-font text-4xl sm:text-5xl md:text-6xl text-[#FFFDF9] drop-shadow-[0_2px_10px_rgba(0,0,0,0.95)]">
+          <h1 className="script-font text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] drop-shadow-[0_6px_16px_rgba(0,0,0,0.85)]">
             Mateo & Clara
           </h1>
         </div>
