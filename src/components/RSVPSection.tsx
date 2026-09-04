@@ -307,9 +307,9 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
           "{content.rsvp_closing_script}"
         </p>
 
-        {/* Floral Cluster at the bottom */}
-        <div data-reveal-delay="180" className="reveal-scale-init mt-12 sm:mt-16 flex justify-center">
-          <FloralAccent position="bottom-rsvp" size="lg" />
+        {/* Floral Garland before the footer section — same size as the one in hero section */}
+        <div data-reveal-delay="180" className="reveal-scale-init mt-12 sm:mt-16 -mx-6 w-[calc(100%+3rem)] flex justify-center overflow-visible">
+          <FloralAccent position="hero-seam" size="full" className="w-full px-0" />
         </div>
 
         {/* Footer Credit & Template Information */}
