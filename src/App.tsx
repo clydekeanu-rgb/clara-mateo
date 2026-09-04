@@ -10,15 +10,24 @@ import { LocationSection } from './components/LocationSection';
 import { DetailsSection } from './components/DetailsSection';
 import { RSVPSection } from './components/RSVPSection';
 import { TornDivider } from './components/TornDivider';
+import { EnvelopeIntro } from './components/EnvelopeIntro';
 import { useScrollReveal } from './hooks/useScrollReveal';
 
 export default function App() {
   const content = weddingContent;
   useScrollReveal();
 
+  const [showEnvelopeIntro, setShowEnvelopeIntro] = React.useState<boolean>(true);
+
   return (
-    <main
-      id="main-content"
+    <>
+      {/* Interactive Envelope Intro Animation Overlay */}
+      {showEnvelopeIntro && (
+        <EnvelopeIntro onComplete={() => setShowEnvelopeIntro(false)} />
+      )}
+
+      <main
+        id="main-content"
       className="w-full min-h-screen bg-[#0D1512] text-[#F7F3E8] flex flex-col items-center justify-start selection:bg-emerald selection:text-ivory relative"
     >
       {/* Elegant Dark ambient grain texture overlay */}
@@ -33,7 +42,11 @@ export default function App() {
         
         {/* Left Column: Sticky Hero on Desktop / Full Width Top Section on Mobile & Tablet */}
         <aside className="w-full max-w-[480px] sm:max-w-[560px] md:max-w-[640px] mx-auto lg:max-w-none lg:mx-0 lg:w-[42%] xl:w-[38%] lg:sticky lg:top-0 lg:self-start lg:h-screen lg:min-h-screen z-20 lg:border-r lg:border-[#1B4332]/30 lg:shadow-[8px_0_30px_rgba(0,0,0,0.45)]">
-          <Hero content={content} isStickyColumn={true} />
+          <Hero
+            content={content}
+            isStickyColumn={true}
+            onReopenEnvelope={() => setShowEnvelopeIntro(true)}
+          />
         </aside>
 
         {/* Right Column: Scrollable Wedding Details & Information */}
@@ -116,5 +129,6 @@ export default function App() {
         </div>
       </div>
     </main>
+    </>
   );
 }
