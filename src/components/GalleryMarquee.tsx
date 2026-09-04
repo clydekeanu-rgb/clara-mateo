@@ -157,18 +157,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
         aria-hidden="true"
       />
 
-      {/* Top-Left Floral Flank (Underneath the Marquee Cards: cards glide ON TOP) */}
-      <div
-        className="absolute -bottom-24 sm:-bottom-36 md:-bottom-48 left-0 z-0 pointer-events-none select-none w-44 sm:w-64 md:w-80 lg:w-[26rem] max-w-[48vw] overflow-visible"
-        aria-hidden="true"
-      >
-        <img
-          src={`${import.meta.env.BASE_URL}floral_flank.png`}
-          alt=""
-          className="w-full h-auto object-contain drop-shadow-[0_16px_32px_rgba(0,0,0,0.5)]"
-          loading="lazy"
-        />
-      </div>
+
 
       {/* Marquee Carousel Container */}
       <div
