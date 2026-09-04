@@ -10,6 +10,7 @@ import { LocationSection } from './components/LocationSection';
 import { DetailsSection } from './components/DetailsSection';
 import { RSVPSection } from './components/RSVPSection';
 import { TornDivider } from './components/TornDivider';
+import { Preloader } from './components/Preloader';
 import { EnvelopeIntro } from './components/EnvelopeIntro';
 import { useScrollReveal } from './hooks/useScrollReveal';
 import { weddingAudio } from './utils/audio';
@@ -18,10 +19,16 @@ export default function App() {
   const content = weddingContent;
   useScrollReveal();
 
+  const [isLoading, setIsLoading] = React.useState<boolean>(true);
   const [showEnvelopeIntro, setShowEnvelopeIntro] = React.useState<boolean>(true);
 
   return (
     <>
+      {/* Luxury Asset Preloader Screen */}
+      {isLoading && (
+        <Preloader onLoaded={() => setIsLoading(false)} />
+      )}
+
       {/* Interactive Envelope Intro Animation Overlay */}
       {showEnvelopeIntro && (
         <EnvelopeIntro
