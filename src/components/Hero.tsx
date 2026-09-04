@@ -7,10 +7,9 @@ import { weddingAudio } from '../utils/audio';
 interface HeroProps {
   content: WeddingContent;
   isStickyColumn?: boolean;
-  onReopenEnvelope?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false, onReopenEnvelope }) => {
+export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(weddingAudio);
 
@@ -41,23 +40,6 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false, onR
         className="btn-press absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-[#1B4332]/60 border border-emerald-light/30 text-[#F7F3E8]/80 hover:text-[#F7F3E8] hover:bg-[#1B4332] hover:border-emerald-light/60 transition-all duration-300 backdrop-blur-sm cursor-pointer"
       >
         {isPlaying ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
-      </button>
-
-      {/* Animated Envelope Intro Button — top left */}
-      <button
-        type="button"
-        onClick={() => {
-          if (onReopenEnvelope) {
-            onReopenEnvelope();
-          } else {
-            window.location.reload();
-          }
-        }}
-        title="Open Animated Envelope"
-        className="btn-press absolute top-4 left-4 z-50 flex items-center gap-1.5 px-3 py-2 rounded-full bg-[#1B4332]/70 border border-[#C5A869]/40 text-[#EDE6D3] hover:text-[#F7F3E8] hover:bg-[#1B4332] hover:border-[#C5A869] text-xs serif-title uppercase tracking-widest backdrop-blur-md transition-all duration-300 shadow-md cursor-pointer"
-      >
-        <span className="text-sm leading-none">✉️</span>
-        <span className="hidden sm:inline">Envelope</span>
       </button>
 
       {/* Background Image */}

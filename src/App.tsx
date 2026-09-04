@@ -45,7 +45,6 @@ export default function App() {
           <Hero
             content={content}
             isStickyColumn={true}
-            onReopenEnvelope={() => setShowEnvelopeIntro(true)}
           />
         </aside>
 
