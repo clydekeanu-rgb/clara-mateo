@@ -12,6 +12,7 @@ import { RSVPSection } from './components/RSVPSection';
 import { TornDivider } from './components/TornDivider';
 import { EnvelopeIntro } from './components/EnvelopeIntro';
 import { useScrollReveal } from './hooks/useScrollReveal';
+import { weddingAudio } from './utils/audio';
 
 export default function App() {
   const content = weddingContent;
@@ -23,7 +24,12 @@ export default function App() {
     <>
       {/* Interactive Envelope Intro Animation Overlay */}
       {showEnvelopeIntro && (
-        <EnvelopeIntro onComplete={() => setShowEnvelopeIntro(false)} />
+        <EnvelopeIntro
+          onComplete={() => {
+            setShowEnvelopeIntro(false);
+            weddingAudio.play();
+          }}
+        />
       )}
 
       <main

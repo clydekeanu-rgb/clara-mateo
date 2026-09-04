@@ -16,9 +16,6 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
     if (hasStarted) return;
     setHasStarted(true);
 
-    // Automatic romantic soundtrack start on interaction
-    weddingAudio.play();
-
     const video = videoRef.current;
     if (video) {
       video.currentTime = 0;
@@ -36,6 +33,10 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
   const handleVideoComplete = () => {
     if (isFadingOut) return;
     setIsFadingOut(true);
+
+    // Start romantic song as main invitation page begins to emerge
+    weddingAudio.play();
+
     // Smooth transition to main invitation page on last frame
     setTimeout(() => {
       onComplete();
