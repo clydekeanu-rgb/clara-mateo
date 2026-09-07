@@ -97,11 +97,11 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
 
         {/* 
           "You Are Cordially Invited" and "Mateo & Clara"
-          Displayed cleanly over the first frame without any tint background.
+          Displayed cleanly over the first frame on the dark brown wood table area.
           Slowly fades away about 2 seconds in the video.
         */}
         <div
-          className={`absolute top-10 sm:top-14 inset-x-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-1000 ease-out ${
+          className={`absolute top-[17%] sm:top-[18%] inset-x-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-1000 ease-out ${
             isTextFaded ? 'opacity-0' : 'opacity-100'
           }`}
         >
