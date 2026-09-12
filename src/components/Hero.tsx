@@ -37,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({ content, isStickyColumn = false }) =
         type="button"
         onClick={toggleAudio}
         aria-label={isPlaying ? 'Mute music' : 'Play music'}
-        className="btn-press absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center rounded-full bg-[#1B4332]/60 border border-emerald-light/30 text-[#F7F3E8]/80 hover:text-[#F7F3E8] hover:bg-[#1B4332] hover:border-emerald-light/60 transition-all duration-300 backdrop-blur-sm cursor-pointer"
+        className="btn-press absolute top-4 right-4 z-50 w-11 h-11 flex items-center justify-center rounded-full bg-black/40 hover:bg-black/60 active:scale-90 border border-white/20 text-[#EDE6D3] transition-all duration-200 backdrop-blur-xl shadow-[0_4px_20px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.25)] cursor-pointer"
       >
         {isPlaying ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
       </button>

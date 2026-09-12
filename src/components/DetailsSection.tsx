@@ -46,9 +46,9 @@ export const DetailsSection: React.FC<DetailsSectionProps> = ({ content }) => {
             <div
               key={idx}
               data-reveal-delay={`${100 + idx * 80}`}
-              className="reveal-scale-init relative p-8 sm:p-10 rounded-xs bg-[#F7F3E8] border border-[#1B4332]/20 shadow-xs transition-all duration-300 hover:border-[#1B4332]/45 hover:shadow-sm hover:-translate-y-1"
+              className="reveal-scale-init relative p-8 sm:p-10 rounded-3xl bg-white/75 backdrop-blur-xl border border-black/5 shadow-[0_12px_36px_rgba(27,67,50,0.06),inset_0_1px_0_rgba(255,255,255,0.9)] hover:shadow-[0_20px_48px_rgba(27,67,50,0.12)] hover:-translate-y-0.5 hover:bg-white/85 transition-all duration-300"
             >
-              <div className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/15 mb-4">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#1B4332]/10 text-[#1B4332] border border-[#1B4332]/10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.6)] mb-4">
                 {card.icon === 'gift' ? (
                   <Gift className="w-5 h-5" />
                 ) : card.icon === 'wine' ? (

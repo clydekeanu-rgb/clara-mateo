@@ -76,15 +76,15 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
           {content.welcome.intro} {content.welcome.sentiment}
         </p>
 
-        {/* Date Highlight Badge */}
+        {/* Date Highlight Badge — Apple Glass Card */}
         <div
           data-reveal-delay="120"
-          className="reveal-init inline-block my-4 py-3 px-8 sm:px-12 border-y border-[#EDE6D3]/30 bg-[#141F1A]/50 shadow-xs"
+          className="reveal-init inline-block my-6 py-5 sm:py-6 px-8 sm:px-14 rounded-3xl border border-white/10 bg-[#141F1A]/70 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.36),inset_0_1px_0_rgba(255,255,255,0.15)] transition-all duration-300 hover:border-white/20"
         >
-          <p className="serif-title text-sm sm:text-base md:text-lg font-bold tracking-[0.2em] text-[#52B788]">
+          <p className="script-font text-[48px] sm:text-[60px] md:text-[72px] text-[#C5A869] drop-shadow-md leading-[1.1] sm:leading-[1.15] mb-1">
             {content.event_date}
           </p>
-          <p className="serif-title text-[11px] sm:text-xs text-[#C2CEC2] tracking-[0.2em] mt-1">
+          <p className="serif-title text-xs sm:text-sm text-[#C2CEC2] tracking-[0.25em] mt-1">
             {content.venue_city}
           </p>
         </div>
@@ -97,13 +97,13 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
           "{content.welcome.closing}"
         </p>
 
-        {/* Subtle Calendar Action */}
+        {/* Calendar Action Buttons — Apple Pill Design */}
         <div data-reveal-delay="200" className="reveal-init flex flex-wrap items-center justify-center gap-3 pt-2">
           <a
             href={googleCalendarUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-press inline-flex items-center gap-2 px-4 py-2 rounded-xs text-[11px] sm:text-xs serif-title tracking-wider border border-[#EDE6D3]/40 text-[#EDE6D3] hover:bg-[#EDE6D3] hover:text-[#0D1512] transition-all duration-300 shadow-xs"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs serif-title tracking-wider font-semibold bg-white/10 hover:bg-white/20 active:scale-95 text-[#EDE6D3] border border-white/15 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-200"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Google Calendar</span>
@@ -111,7 +111,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
           <button
             type="button"
             onClick={handleDownloadICS}
-            className="btn-press inline-flex items-center gap-2 px-4 py-2 rounded-xs text-[11px] sm:text-xs serif-title tracking-wider border border-[#EDE6D3]/40 text-[#EDE6D3] hover:bg-[#EDE6D3] hover:text-[#0D1512] transition-all duration-300 shadow-xs cursor-pointer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-xs serif-title tracking-wider font-semibold bg-white/10 hover:bg-white/20 active:scale-95 text-[#EDE6D3] border border-white/15 backdrop-blur-md shadow-[0_4px_16px_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-200 cursor-pointer"
           >
             <Calendar className="w-3.5 h-3.5" />
             <span>Apple / iCal</span>

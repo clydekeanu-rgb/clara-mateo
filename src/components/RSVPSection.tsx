@@ -91,11 +91,11 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
         {/* Date & Time Recap */}
         <div
           data-reveal-delay="90"
-          className="reveal-init inline-flex items-center justify-center space-x-2 text-emerald-light text-xs sm:text-sm serif-title tracking-wider mb-6"
+          className="reveal-init inline-flex flex-wrap items-center justify-center gap-3 mb-6"
         >
-          <span>{content.event_date}</span>
-          <span className="opacity-60">•</span>
-          <span>{content.event_time_ceremony}</span>
+          <span className="script-font text-4xl sm:text-5xl text-[#C5A869] drop-shadow-sm leading-none">{content.event_date}</span>
+          <span className="opacity-60 text-[#C5A869] text-sm">•</span>
+          <span className="serif-title tracking-wider text-emerald-light text-xs sm:text-sm">{content.event_time_ceremony}</span>
         </div>
 
         {/* Instruction copy */}
@@ -108,8 +108,8 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
 
         {/* In-page RSVP Form or Success State */}
         {status === 'success' ? (
-          <div className="reveal-scale-init bg-[#141F1A]/90 border border-[#1B4332] rounded-xs p-8 sm:p-12 text-center shadow-xl relative backdrop-blur-xs">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#1B4332]/40 text-emerald-light border border-emerald-light/30 mb-6">
+          <div className="reveal-scale-init bg-[#141F1A]/80 border border-white/10 rounded-3xl p-8 sm:p-12 text-center shadow-[0_16px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)] relative backdrop-blur-xl">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-emerald-light/15 text-emerald-light border border-emerald-light/30 shadow-[inset_0_1px_1px_rgba(255,255,255,0.2)] mb-6">
               <CheckCircle2 className="w-8 h-8" />
             </div>
             
@@ -135,12 +135,12 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
           <form
             onSubmit={handleSubmit}
             data-reveal-delay="160"
-            className="reveal-scale-init bg-[#141F1A]/90 border border-[#1B4332] rounded-xs p-6 sm:p-10 text-left shadow-2xl backdrop-blur-xs space-y-6"
+            className="reveal-scale-init bg-[#141F1A]/80 border border-white/10 rounded-3xl p-6 sm:p-10 text-left shadow-[0_16px_48px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl space-y-6"
             noValidate
           >
             {/* Error banner */}
             {status === 'error' && errorMessage && (
-              <div className="flex items-center gap-3 p-4 rounded bg-red-950/60 border border-red-800/60 text-red-200 text-sm font-body">
+              <div className="flex items-center gap-3 p-4 rounded-2xl bg-red-950/60 border border-red-800/40 text-red-200 text-sm font-body backdrop-blur-md">
                 <AlertCircle className="w-5 h-5 flex-shrink-0" />
                 <span>{errorMessage}</span>
               </div>
@@ -165,7 +165,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   placeholder="e.g. Katherine & Jonathan Vance"
                   value={formData.fullName}
                   onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                  className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/30 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg"
+                  className="w-full pl-10 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-[#F7F3E8] placeholder:text-[#F7F3E8]/30 focus:outline-none focus:border-emerald-light focus:ring-2 focus:ring-emerald-light/20 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)] transition-all font-body text-base sm:text-lg"
                 />
               </div>
             </div>
@@ -175,15 +175,15 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
               <label className="block text-xs sm:text-sm serif-title tracking-widest uppercase text-[#9CAF9A] mb-2">
                 Will you be attending? <span className="text-emerald-light">*</span>
               </label>
-              <div className="grid grid-cols-2 gap-3 sm:gap-4" role="group" aria-label="Attendance selection">
+              <div className="grid grid-cols-2 gap-2 p-1.5 bg-black/40 border border-white/10 rounded-2xl shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)]" role="group" aria-label="Attendance selection">
                 <button
                   type="button"
                   aria-pressed={formData.attending === 'yes'}
                   onClick={() => setFormData({ ...formData, attending: 'yes' })}
-                  className={`btn-press py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
+                  className={`btn-press py-3 px-4 rounded-xl text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer ${
                     formData.attending === 'yes'
-                      ? 'bg-[#1B4332] border-emerald-light text-[#F7F3E8] shadow-[0_0_12px_rgba(27,67,50,0.5)]'
-                      : 'bg-[#0D1512]/80 border-[#1B4332]/60 text-[#F7F3E8]/60 hover:text-[#F7F3E8] hover:border-[#1B4332]'
+                      ? 'bg-gradient-to-b from-[#255a43] to-[#1B4332] text-white shadow-[0_4px_12px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.25)] border border-emerald-light/40'
+                      : 'bg-transparent text-[#F7F3E8]/60 hover:text-[#F7F3E8] border border-transparent'
                   }`}
                 >
                   Joyfully Accept
@@ -192,10 +192,10 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   type="button"
                   aria-pressed={formData.attending === 'no'}
                   onClick={() => setFormData({ ...formData, attending: 'no' })}
-                  className={`btn-press py-3 px-4 rounded-xs border text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all cursor-pointer ${
+                  className={`btn-press py-3 px-4 rounded-xl text-center serif-title text-xs sm:text-sm tracking-wider uppercase transition-all duration-200 cursor-pointer ${
                     formData.attending === 'no'
-                      ? 'bg-[#1B4332] border-emerald-light text-[#F7F3E8] shadow-[0_0_12px_rgba(27,67,50,0.5)]'
-                      : 'bg-[#0D1512]/80 border-[#1B4332]/60 text-[#F7F3E8]/60 hover:text-[#F7F3E8] hover:border-[#1B4332]'
+                      ? 'bg-gradient-to-b from-[#255a43] to-[#1B4332] text-white shadow-[0_4px_12px_rgba(0,0,0,0.35),inset_0_1px_0_rgba(255,255,255,0.25)] border border-emerald-light/40'
+                      : 'bg-transparent text-[#F7F3E8]/60 hover:text-[#F7F3E8] border border-transparent'
                   }`}
                 >
                   Regretfully Decline
@@ -220,12 +220,12 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                     id="rsvp-guest-count"
                     value={formData.guestCount}
                     onChange={(e) => setFormData({ ...formData, guestCount: parseInt(e.target.value, 10) || 1 })}
-                    className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg cursor-pointer"
+                    className="w-full pl-10 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-[#F7F3E8] focus:outline-none focus:border-emerald-light focus:ring-2 focus:ring-emerald-light/20 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)] transition-all font-body text-base sm:text-lg cursor-pointer"
                   >
-                    <option value={1}>1 Guest (Just Myself)</option>
-                    <option value={2}>2 Guests</option>
-                    <option value={3}>3 Guests</option>
-                    <option value={4}>4 Guests</option>
+                    <option value={1} className="bg-[#141F1A] text-[#F7F3E8]">1 Guest (Just Myself)</option>
+                    <option value={2} className="bg-[#141F1A] text-[#F7F3E8]">2 Guests</option>
+                    <option value={3} className="bg-[#141F1A] text-[#F7F3E8]">3 Guests</option>
+                    <option value={4} className="bg-[#141F1A] text-[#F7F3E8]">4 Guests</option>
                   </select>
                 </div>
               </div>
@@ -241,7 +241,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   Dietary Preferences or Allergies <span className="text-[#9CAF9A]/80 text-xs font-normal">(Optional)</span>
                 </label>
                 <div className="relative">
-                  <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#9CAF9A]/70">
+                  <div className="absolute top-4 left-3.5 pointer-events-none text-[#9CAF9A]/70">
                     <Utensils className="w-4 h-4" />
                   </div>
                   <input
@@ -250,7 +250,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                     placeholder="e.g. Vegetarian, Gluten-free, Nut allergy"
                     value={formData.dietaryNotes}
                     onChange={(e) => setFormData({ ...formData, dietaryNotes: e.target.value })}
-                    className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/50 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg"
+                    className="w-full pl-10 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-[#F7F3E8] placeholder:text-[#F7F3E8]/50 focus:outline-none focus:border-emerald-light focus:ring-2 focus:ring-emerald-light/20 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)] transition-all font-body text-base sm:text-lg"
                   />
                 </div>
               </div>
@@ -265,7 +265,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                 Message for the Couple <span className="text-[#9CAF9A]/80 text-xs font-normal">(Optional)</span>
               </label>
               <div className="relative">
-                <div className="absolute top-3.5 left-3.5 pointer-events-none text-[#9CAF9A]/70">
+                <div className="absolute top-4 left-3.5 pointer-events-none text-[#9CAF9A]/70">
                   <MessageSquare className="w-4 h-4" />
                 </div>
                 <textarea
@@ -274,7 +274,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
                   placeholder="Share a wish or sweet memory..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full pl-10 pr-4 py-3 bg-[#0D1512]/90 border border-[#1B4332] rounded-xs text-[#F7F3E8] placeholder:text-[#F7F3E8]/50 focus:outline-none focus:border-emerald-light focus:ring-1 focus:ring-emerald-light transition-all font-body text-base sm:text-lg resize-none"
+                  className="w-full pl-10 pr-4 py-3.5 bg-black/40 border border-white/10 rounded-2xl text-[#F7F3E8] placeholder:text-[#F7F3E8]/50 focus:outline-none focus:border-emerald-light focus:ring-2 focus:ring-emerald-light/20 shadow-[inset_0_2px_4px_rgba(0,0,0,0.35)] transition-all font-body text-base sm:text-lg resize-none"
                 />
               </div>
             </div>
@@ -284,7 +284,7 @@ export const RSVPSection: React.FC<RSVPSectionProps> = ({ content }) => {
               <button
                 type="submit"
                 disabled={status === 'submitting'}
-                className="btn-press w-full sm:w-auto min-w-[200px] inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#1B4332] hover:bg-[#255a43] border border-emerald-light/40 text-[#F7F3E8] serif-title text-xs sm:text-sm tracking-[0.2em] uppercase rounded-xs transition-all duration-300 shadow-lg hover:shadow-[#1B4332]/40 hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
+                className="btn-press w-full sm:w-auto min-w-[220px] inline-flex items-center justify-center gap-2.5 px-9 py-4 bg-gradient-to-r from-[#1B4332] via-[#255a43] to-[#2d6a4f] hover:brightness-110 active:scale-95 border border-white/20 text-white serif-title text-xs sm:text-sm tracking-[0.2em] uppercase rounded-full transition-all duration-300 shadow-[0_8px_28px_rgba(27,67,50,0.5),inset_0_1px_0_rgba(255,255,255,0.3)] hover:-translate-y-0.5 cursor-pointer disabled:opacity-50"
               >
                 {status === 'submitting' ? (
                   <span>Sending RSVP...</span>

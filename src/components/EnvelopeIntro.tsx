@@ -165,7 +165,7 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
             isTextFaded ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-xs border border-[#1B4332]/20 shadow-[0_2px_10px_rgba(0,0,0,0.06)] animate-pulse">
+          <div className="flex items-center gap-2 px-5 py-2 rounded-full bg-white/80 backdrop-blur-xl border border-white/60 shadow-[0_4px_20px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.9)] animate-pulse">
             <span className="serif-title text-[10px] sm:text-xs tracking-[0.25em] uppercase text-[#1B4332] font-semibold">
               Click the envelope
             </span>

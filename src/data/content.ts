@@ -111,8 +111,8 @@ export const weddingContent: WeddingContent = {
   table_setting_image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1600&q=80",
   table_setting_image_alt: "Elegant wedding banquet table with deep emerald accents and gold tableware",
   
-  venue_image: "https://images.unsplash.com/photo-1544984243-ec57ea16fe25?auto=format&fit=crop&w=1600&q=80",
-  venue_image_alt: "Angelfields Nature Sanctuary grounds and grand estate in Tagaytay at dusk",
+  venue_image: `${import.meta.env.BASE_URL}angelfields_venue.png`,
+  venue_image_alt: "Angelfields Nature Sanctuary grand pavilion and expansive lawn in Silang, Cavite",
   
   gallery_images: [
     {

@@ -19,9 +19,10 @@
   --color-ink-muted: #574F44;
   --color-ink-light: #7A7062;
 
-  --font-serif: "Cinzel", "Palatino", "Georgia", serif;
-  --font-display: "Cinzel", "Palatino", "Georgia", serif;
-  --font-body: "Lora", "Georgia", serif;
+  --font-serif: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-display: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-sans: "Cabin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body: "Cabin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   --font-script: "Great Vibes", "Brush Script MT", cursive;
 }
 
@@ -59,6 +60,10 @@ body {
 }
 
 .font-body {
+  font-family: var(--font-body);
+}
+
+.font-sans {
   font-family: var(--font-body);
 }
 

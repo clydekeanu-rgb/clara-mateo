@@ -68,7 +68,7 @@ export const DressCode: React.FC<DressCodeProps> = ({ content }) => {
 
                 {/* Swatch Label Tooltip */}
                 <div
-                  className={`absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap px-3 py-1 rounded-xs bg-[#141F1A] border border-emerald-deep/60 text-[#F7F3E8] text-xs serif-title tracking-wider uppercase transition-all duration-200 pointer-events-none shadow-md ${
+                  className={`absolute -bottom-10 left-1/2 -translate-x-1/2 whitespace-nowrap px-3.5 py-1 rounded-full bg-[#141F1A]/85 backdrop-blur-md border border-white/15 text-[#F7F3E8] text-xs serif-title tracking-wider uppercase transition-all duration-200 pointer-events-none shadow-[0_4px_16px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.15)] ${
                     isHovered ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-1 scale-95'
                   }`}
                 >

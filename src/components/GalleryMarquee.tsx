@@ -231,7 +231,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
               <div
                 key={`r1-${originalIndex}-${index}`}
                 onClick={() => setSelectedImage(originalIndex)}
-                className="gallery-card shrink-0 w-38 sm:w-48 md:w-52 bg-[#FAF8F5] px-2.5 pt-3 pb-8 sm:px-3 sm:pt-4 sm:pb-10 rounded-xs border border-[#E5E0D8] shadow-[0_10px_25px_rgba(0,0,0,0.7)] cursor-pointer transition-[transform,opacity,box-shadow] duration-200 group relative select-none"
+                className="gallery-card shrink-0 w-38 sm:w-48 md:w-52 bg-[#FAF8F5] px-2.5 pt-3 pb-8 sm:px-3 sm:pt-4 sm:pb-10 rounded-2xl border border-black/5 shadow-[0_12px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.8)] cursor-pointer transition-[transform,opacity,box-shadow] duration-300 group relative select-none"
                 role="button"
                 tabIndex={0}
                 aria-label={`View photo ${originalIndex + 1}: ${photo.alt}`}
@@ -242,7 +242,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
                 }}
               >
                 {/* 1:1 Square Photo Area */}
-                <div className="w-full aspect-square relative overflow-hidden bg-[#1c1c1c] border border-black/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
+                <div className="w-full aspect-square relative overflow-hidden rounded-xl bg-[#1c1c1c] border border-black/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
                   <img
                     src={photo.src}
                     alt={photo.alt}
@@ -276,7 +276,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
               <div
                 key={`r2-${photoIndex}-${index}`}
                 onClick={() => setSelectedImage(photoIndex)}
-                className="gallery-card shrink-0 w-38 sm:w-48 md:w-52 bg-[#FAF8F5] px-2.5 pt-3 pb-8 sm:px-3 sm:pt-4 sm:pb-10 rounded-xs border border-[#E5E0D8] shadow-[0_10px_25px_rgba(0,0,0,0.7)] cursor-pointer transition-[transform,opacity,box-shadow] duration-200 group relative select-none"
+                className="gallery-card shrink-0 w-38 sm:w-48 md:w-52 bg-[#FAF8F5] px-2.5 pt-3 pb-8 sm:px-3 sm:pt-4 sm:pb-10 rounded-2xl border border-black/5 shadow-[0_12px_32px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.8)] cursor-pointer transition-[transform,opacity,box-shadow] duration-300 group relative select-none"
                 role="button"
                 tabIndex={0}
                 aria-label={`View photo ${photoIndex + 1}: ${photo.alt}`}
@@ -287,7 +287,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
                 }}
               >
                 {/* 1:1 Square Photo Area */}
-                <div className="w-full aspect-square relative overflow-hidden bg-[#1c1c1c] border border-black/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
+                <div className="w-full aspect-square relative overflow-hidden rounded-xl bg-[#1c1c1c] border border-black/10 shadow-[inset_0_1px_3px_rgba(0,0,0,0.15)]">
                   <img
                     src={photo.src}
                     alt={photo.alt}
@@ -320,7 +320,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
           {/* Close Button */}
           <button
             onClick={() => setSelectedImage(null)}
-            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 rounded-full bg-white/10 hover:bg-white/20 text-[#F7F3E8] transition-colors cursor-pointer z-50 focus:outline-hidden focus:ring-2 focus:ring-emerald-light"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 p-2.5 rounded-full bg-white/10 hover:bg-white/20 active:scale-95 text-[#F7F3E8] backdrop-blur-xl border border-white/20 transition-all cursor-pointer z-50 focus:outline-hidden focus:ring-2 focus:ring-emerald-light shadow-lg"
             aria-label="Close photo preview"
           >
             <X className="w-6 h-6" />
@@ -332,7 +332,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
               e.stopPropagation();
               setSelectedImage((prev) => (prev !== null ? (prev - 1 + photoList.length) % photoList.length : null));
             }}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/50 hover:bg-black/80 border border-white/15 text-[#F7F3E8] transition-all cursor-pointer z-50 focus:outline-hidden"
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 p-3 sm:p-3.5 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-xl border border-white/20 text-[#F7F3E8] transition-all cursor-pointer z-50 active:scale-90 shadow-lg focus:outline-hidden"
             aria-label="Previous photo"
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -344,7 +344,7 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
               e.stopPropagation();
               setSelectedImage((prev) => (prev !== null ? (prev + 1) % photoList.length : null));
             }}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-2 sm:p-3 rounded-full bg-black/50 hover:bg-black/80 border border-white/15 text-[#F7F3E8] transition-all cursor-pointer z-50 focus:outline-hidden"
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 p-3 sm:p-3.5 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-xl border border-white/20 text-[#F7F3E8] transition-all cursor-pointer z-50 active:scale-90 shadow-lg focus:outline-hidden"
             aria-label="Next photo"
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -352,10 +352,10 @@ export const GalleryMarquee: React.FC<GalleryMarqueeProps> = ({ images = [] }) =
 
           {/* Active Photo Container: Polaroid Presentation in Lightbox */}
           <div
-            className="relative max-w-md sm:max-w-lg w-full px-3.5 pt-4 pb-12 sm:px-4 sm:pt-5 sm:pb-16 bg-[#FAF8F5] rounded-xs border border-[#E5E0D8] shadow-2xl"
+            className="relative max-w-md sm:max-w-lg w-full px-3.5 pt-4 pb-12 sm:px-4 sm:pt-5 sm:pb-16 bg-[#FAF8F5] rounded-3xl border border-black/5 shadow-[0_24px_64px_rgba(0,0,0,0.7),inset_0_1px_0_rgba(255,255,255,0.8)]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="w-full aspect-square relative overflow-hidden bg-[#1c1c1c] border border-black/10 shadow-inner">
+            <div className="w-full aspect-square relative overflow-hidden rounded-2xl bg-[#1c1c1c] border border-black/10 shadow-inner">
               <img
                 src={photoList[selectedImage].src}
                 alt={photoList[selectedImage].alt}

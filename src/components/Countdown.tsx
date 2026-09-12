@@ -77,12 +77,12 @@ export const Countdown: React.FC<CountdownProps> = ({
             <div
               key={index}
               data-reveal-delay={`${100 + index * 60}`}
-              className="reveal-scale-init flex flex-col items-center justify-center p-3 sm:p-4 rounded-xs bg-[#141F1A]/85 border border-[#1B4332]/60 shadow-[0_4px_16px_rgba(0,0,0,0.35)] backdrop-blur-xs transition-all duration-300 hover:border-emerald-light/40 hover:-translate-y-0.5"
+              className="reveal-scale-init flex flex-col items-center justify-center p-3.5 sm:p-5 rounded-2xl bg-[#141F1A]/70 border border-white/10 shadow-[0_8px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-xl transition-all duration-300 hover:border-white/25 hover:-translate-y-1 hover:shadow-[0_12px_28px_rgba(0,0,0,0.5)]"
             >
-              <span className="serif-title text-2xl sm:text-3xl md:text-4xl font-medium text-[#F7F3E8] leading-none mb-1.5 tabular-nums">
+              <span className="serif-title text-2xl sm:text-3xl md:text-4xl font-semibold text-[#F7F3E8] leading-none mb-1.5 tabular-nums">
                 {String(unit.value).padStart(2, '0')}
               </span>
-              <span className="text-[10px] sm:text-xs text-[#9CAF9A] serif-title tracking-[0.2em] uppercase">
+              <span className="text-[10px] sm:text-xs text-[#9CAF9A] serif-title tracking-[0.2em] uppercase font-medium">
                 {unit.label}
               </span>
             </div>
