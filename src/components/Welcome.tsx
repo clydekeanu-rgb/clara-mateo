@@ -60,7 +60,7 @@ export const Welcome: React.FC<WelcomeProps> = ({ content }) => {
   };
 
   return (
-    <section className="relative w-full bg-[#0D1512] dark-texture text-[#F7F3E8] pt-44 pb-6 sm:pt-48 sm:pb-8 md:pt-52 md:pb-8 lg:pt-20 lg:pb-10 px-6 overflow-hidden">
+    <section className="relative w-full bg-[#0D1512] dark-texture text-[#F7F3E8] pt-16 sm:pt-20 md:pt-24 pb-10 sm:pb-14 px-6 overflow-hidden">
       {/* Decorative content container constrained to max 640px */}
       <div className="max-w-[640px] mx-auto text-center relative z-10">
         {/* Salutation / Section Title */}

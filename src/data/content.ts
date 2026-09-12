@@ -25,6 +25,20 @@ export interface DetailCard {
   icon: 'gift' | 'comfort' | 'wine';
 }
 
+export interface PhotoSharingContent {
+  heading: string;
+  subtitle: string;
+  intro: string;
+  album_title: string;
+  album_description: string;
+  album_url: string;
+  hashtag: string;
+  hashtag_title: string;
+  hashtag_description: string;
+  prompts_title: string;
+  prompts: string[];
+}
+
 export interface WeddingContent {
   // Couple & Branding
   partner_1: string;
@@ -73,10 +87,12 @@ export interface WeddingContent {
   location_subtitle: string;
   location_intro: string;
   
-  details_heading: string;
-  details_subtitle: string;
-  details_paragraphs: string[];
+  details_heading?: string;
+  details_subtitle?: string;
+  details_paragraphs?: string[];
   details_cards?: DetailCard[];
+  
+  photo_sharing: PhotoSharingContent;
   
   rsvp_heading: string;
   rsvp_subtitle: string;
@@ -219,6 +235,25 @@ export const weddingContent: WeddingContent = {
       description: "The venue features garden walkways and Tagaytay evenings can be pleasantly breezy. We recommend comfortable footwear and a light wrap or blazer for the outdoor reception.",
     },
   ],
+  
+  photo_sharing: {
+    heading: "Guest Photo Sharing",
+    subtitle: "Through Your Lens",
+    intro: "We want to see our wedding day through your eyes! Help us preserve every candid laugh, joyful tear, and dance floor celebration by capturing and sharing your photos and video clips with us.",
+    album_title: "Shared Wedding Album",
+    album_description: "Upload your favorite photos and videos directly from your phone into our shared digital album—no app download required.",
+    album_url: "https://photos.google.com",
+    hashtag: "#MateoAndClara2026",
+    hashtag_title: "Tag Us on Social Media",
+    hashtag_description: "Share your Instagram stories, reels, and posts with our official hashtag so we can find and cherish all your memories.",
+    prompts_title: "Moments We'd Love You to Capture",
+    prompts: [
+      "The grand ceremony entrance & first kiss",
+      "Golden hour portraits around Angelfields Sanctuary",
+      "Heartfelt family toasts & table celebrations",
+      "Late-night dance floor moves & sparkler send-off",
+    ],
+  },
   
   rsvp_heading: "RSVP",
   rsvp_subtitle: "Kindly Respond",

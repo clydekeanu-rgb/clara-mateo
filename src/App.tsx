@@ -1,13 +1,14 @@
 import React from 'react';
 import { weddingContent } from './data/content';
 import { Hero } from './components/Hero';
+import { FloralAccent } from './components/FloralAccent';
 import { Welcome } from './components/Welcome';
 import { Countdown } from './components/Countdown';
 import { GalleryMarquee } from './components/GalleryMarquee';
 import { Timing } from './components/Timing';
 import { DressCode } from './components/DressCode';
 import { LocationSection } from './components/LocationSection';
-import { DetailsSection } from './components/DetailsSection';
+import { PhotoSharingSection } from './components/PhotoSharingSection';
 import { RSVPSection } from './components/RSVPSection';
 import { TornDivider } from './components/TornDivider';
 import { Preloader } from './components/Preloader';
@@ -41,29 +42,31 @@ export default function App() {
 
       <main
         id="main-content"
-      className="w-full min-h-screen bg-[#0D1512] text-[#F7F3E8] flex flex-col items-center justify-start selection:bg-emerald selection:text-ivory relative"
-    >
-      {/* Elegant Dark ambient grain texture overlay */}
-      <div className="grain" aria-hidden="true" />
+        className="w-full min-h-screen bg-[#0D1512] text-[#F7F3E8] flex flex-col items-center justify-start selection:bg-emerald selection:text-ivory relative"
+      >
+        {/* Elegant Dark ambient grain texture overlay */}
+        <div className="grain" aria-hidden="true" />
 
-      {/* 
-        Responsive Architecture:
-        - Mobile & Tablet Portrait (< lg): Elegant single-column layout with uncropped hero portrait and full width.
-        - Desktop (lg+): 2-Column split screen with sticky left Hero column & scrolling right content column.
-      */}
-      <div className="w-full lg:flex lg:flex-row items-start relative z-10">
-        
-        {/* Left Column: Sticky Hero on Desktop / Full Width Top Section on Mobile & Tablet */}
-        <aside className="w-full max-w-[480px] sm:max-w-[560px] md:max-w-[640px] mx-auto lg:max-w-none lg:mx-0 lg:w-[42%] xl:w-[38%] lg:sticky lg:top-0 lg:self-start lg:h-screen lg:min-h-screen z-20 lg:border-r lg:border-[#1B4332]/30 lg:shadow-[8px_0_30px_rgba(0,0,0,0.45)]">
-          <Hero
-            content={content}
-            isStickyColumn={true}
-          />
+        {/* 
+          Sticky Hero Section:
+          Stays pinned in place at top-0 while scrolling down.
+        */}
+        <aside className="sticky top-0 w-full h-screen h-[100dvh] z-0 overflow-hidden">
+          <Hero content={content} />
         </aside>
 
-        {/* Right Column: Scrollable Wedding Details & Information */}
-        <div className="w-full max-w-[480px] sm:max-w-[560px] md:max-w-[640px] mx-auto lg:max-w-none lg:mx-0 lg:w-[58%] xl:w-[62%] flex flex-col relative z-10 bg-[#0D1512] min-h-screen">
+        {/* 
+          Scrolling Page Content:
+          Slides ON TOP of the sticky hero image as you scroll down.
+          Led by the floral bouquet garland at the seam.
+        */}
+        <div className="relative z-10 w-full bg-[#0D1512] shadow-[0_-25px_60px_rgba(0,0,0,0.85)] flex flex-col min-h-screen">
           
+          {/* Full-width Floral Bouquet Garland: Sits at the seam and slides up over the hero image */}
+          <div className="relative z-30 w-full flex items-center justify-center pointer-events-none -mt-14 sm:-mt-18 md:-mt-22 lg:-mt-24 overflow-visible">
+            <FloralAccent position="hero-seam" size="full" className="w-full px-0 drop-shadow-[0_16px_36px_rgba(0,0,0,0.65)]" />
+          </div>
+
           {/* Section 2: Welcome (Night #0D1512 background) */}
           <Welcome content={content} />
 
@@ -116,7 +119,7 @@ export default function App() {
           {/* Section 5: Location (Night/Black background) */}
           <LocationSection content={content} />
 
-          {/* Transition: Night Location to Cream Details */}
+          {/* Transition: Night Location to Cream Photo Sharing */}
           <TornDivider
             fromColor="#0D1512"
             toColor="#EDE6D3"
@@ -125,10 +128,10 @@ export default function App() {
             height={80}
           />
 
-          {/* Section 6: Details (Cream background) */}
-          <DetailsSection content={content} />
+          {/* Section 6: Guest Photo Sharing (Cream background) */}
+          <PhotoSharingSection content={content} />
 
-          {/* Transition: Cream Details to Night/Black RSVP & Footer */}
+          {/* Transition: Cream Photo Sharing to Night/Black RSVP & Footer */}
           <TornDivider
             fromColor="#EDE6D3"
             toColor="#0D1512"
@@ -140,8 +143,7 @@ export default function App() {
           {/* Section 7: RSVP (Night background with bottom floral accent & footer) */}
           <RSVPSection content={content} />
         </div>
-      </div>
-    </main>
+      </main>
     </>
   );
 }
