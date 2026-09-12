@@ -52,7 +52,7 @@ Crafted with a botanical garden aesthetic blending deep forest emerald (`#0D1512
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
 - **Icons**: [Lucide React](https://lucide.dev/)
 - **Fonts**: [Cinzel](https://fonts.google.com/specimen/Cinzel), [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond), [Great Vibes](https://fonts.google.com/specimen/Great+Vibes)
-- **Deployment Target**: Google Firebase Hosting / Static Web Hosting
+- **Deployment Target**: Vercel / Static Web Hosting
 
 ---
 
@@ -140,16 +140,16 @@ Wedding-invitation/
 
 ---
 
-## 🚀 Deployment (Google Firebase Hosting)
+## 🚀 Deployment (Vercel)
 
-1. **Login to Firebase (one-time):**
+1. **Install Vercel CLI (if not already installed):**
    ```bash
-   firebase login
+   npm i -g vercel
    ```
 
-2. **Link your Firebase project:**
+2. **Login to Vercel (one-time):**
    ```bash
-   firebase use --add
+   vercel login
    ```
 
 3. **Deploy:**
