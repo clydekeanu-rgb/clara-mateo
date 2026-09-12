@@ -12,6 +12,10 @@ export const Preloader: React.FC<PreloaderProps> = ({ onLoaded }) => {
 
   useEffect(() => {
     const assetsToLoad: string[] = [
+      // Splash screen assets
+      `${import.meta.env.BASE_URL}crumpled_paper_bg.jpg`,
+      `${import.meta.env.BASE_URL}curated_pages_logo.png`,
+
       // Primary envelope & intro assets
       `${import.meta.env.BASE_URL}envelope_poster.png`,
       `${import.meta.env.BASE_URL}envelope_animation.mp4`,
@@ -73,16 +77,15 @@ export const Preloader: React.FC<PreloaderProps> = ({ onLoaded }) => {
       }
     });
 
-    // Animate displayed progress smoothly with a minimum luxury duration
+    // Animate displayed progress smoothly with a luxury duration
     const startTime = Date.now();
-    const minDurationMs = 1200;
+    const minDurationMs = 1800;
 
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const timeFraction = Math.min(1, elapsed / minDurationMs);
 
       setDisplayedProgress((prev) => {
-        // Progress cannot rush to 100% faster than minDurationMs
         const maxAllowedByTime = timeFraction * 100;
         const target = Math.min(targetProgressRef.current, maxAllowedByTime);
 
@@ -95,7 +98,7 @@ export const Preloader: React.FC<PreloaderProps> = ({ onLoaded }) => {
               setTimeout(() => {
                 onLoaded();
               }, 700);
-            }, 350);
+            }, 300);
           }
           return 100;
         }
@@ -121,47 +124,90 @@ export const Preloader: React.FC<PreloaderProps> = ({ onLoaded }) => {
   return (
     <div
       aria-hidden={isFadingOut}
-      className={`fixed inset-0 z-[120] bg-[#0D1512] flex flex-col items-center justify-center select-none transition-opacity duration-700 ${
+      className={`fixed inset-0 z-[120] flex flex-col items-center justify-center select-none transition-opacity duration-700 overflow-hidden ${
         isFadingOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
       }`}
     >
-      {/* Dark ambient grain texture overlay */}
-      <div className="grain" aria-hidden="true" />
+      {/* 
+        1. BACKGROUND: Authentic Crumpled Paper Background
+        Asset: public/crumpled_paper_bg.jpg
+      */}
+      <div
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat pointer-events-none"
+        style={{
+          backgroundImage: `url('${import.meta.env.BASE_URL}crumpled_paper_bg.jpg')`,
+        }}
+        aria-hidden="true"
+      >
+        {/* Subtle warm artisanal lighting vignette to enhance paper creases */}
+        <div className="absolute inset-0 bg-radial from-transparent via-amber-950/[0.02] to-amber-950/[0.09]" />
+      </div>
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6">
-        {/* Monogram Wax Seal Circle */}
-        <div className="relative mb-6">
-          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full border border-[#C5A869]/50 bg-[#1B4332]/50 backdrop-blur-md flex items-center justify-center shadow-[0_0_25px_rgba(82,183,136,0.25)]">
-            <span className="serif-title text-lg sm:text-xl text-[#C5A869] tracking-widest font-medium">
-              C &amp; M
-            </span>
-          </div>
-          {/* Subtle pulse ring */}
-          <div className="absolute -inset-1.5 rounded-full border border-[#52B788]/25 animate-pulse pointer-events-none" />
+      {/* 
+        2. CENTERED SPLASH CONTENT:
+        Logo in the middle of the screen at least 70% of screen width
+        + Bottom Ring Circling Loading Animation
+      */}
+      <div className="relative z-10 w-full flex flex-col items-center justify-center px-4 sm:px-8">
+        
+        {/* 
+          LOGO:
+          - Centered in the middle of the screen
+          - Mobile: at least 70% of screen width (w-[75vw])
+          - Tablet & Desktop: 50% of screen width (md:w-[50vw])
+          - mix-blend-mode: multiply for authentic ink-on-paper impression
+        */}
+        <div className="relative w-[75vw] md:w-[50vw] max-w-[650px] aspect-[1024/724] flex items-center justify-center">
+          <img
+            src={`${import.meta.env.BASE_URL}curated_pages_logo.png`}
+            alt="Curated Pages"
+            className="w-full h-full object-contain mix-blend-multiply drop-shadow-[0_1px_1px_rgba(255,255,255,0.4)]"
+            loading="eager"
+          />
         </div>
 
-        {/* Names & Event Date */}
-        <h1 className="script-font text-3xl sm:text-4xl text-[#FFFDF9] mb-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
-          Mateo &amp; Clara
-        </h1>
-        <p className="serif-title text-[10px] sm:text-xs tracking-[0.3em] uppercase text-[#C5A869] mb-8">
-          December 18, 2026
-        </p>
+        {/* 
+          3. CIRCLING LOADING ANIMATION:
+          - Bottom ring style positioned directly beneath the logo
+          - Smooth spinning rotation with circular track, active arc, and subtle accent
+        */}
+        <div className="mt-8 sm:mt-10 md:mt-12 flex flex-col items-center justify-center" aria-label="Loading Curated Pages">
+          <div className="relative w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center">
+            {/* Subtle background circular track */}
+            <svg className="w-full h-full" viewBox="0 0 44 44" fill="none" aria-hidden="true">
+              <circle
+                cx="22"
+                cy="22"
+                r="18"
+                stroke="#2B2620"
+                strokeWidth="2"
+                className="opacity-15"
+              />
+            </svg>
 
-        {/* Minimalist Gold Progress Bar */}
-        <div className="w-48 sm:w-56 flex flex-col items-center gap-2.5">
-          <div className="w-full h-[2px] bg-white/10 rounded-full overflow-hidden relative">
-            <div
-              className="h-full bg-gradient-to-r from-[#52B788] via-[#C5A869] to-[#F7F3E8] transition-all duration-75 ease-out rounded-full shadow-[0_0_8px_rgba(197,168,105,0.7)]"
-              style={{ width: `${Math.min(100, Math.max(0, displayedProgress))}%` }}
-            />
-          </div>
+            {/* Circling active arc */}
+            <svg
+              className="absolute inset-0 w-full h-full animate-[spin_1.15s_cubic-bezier(0.4,0,0.2,1)_infinite]"
+              viewBox="0 0 44 44"
+              fill="none"
+              aria-hidden="true"
+            >
+              <circle
+                cx="22"
+                cy="22"
+                r="18"
+                stroke="#2B2620"
+                strokeWidth="2.5"
+                strokeDasharray="32 80"
+                strokeLinecap="round"
+              />
+            </svg>
 
-          <div className="w-full flex justify-between items-center text-[10px] serif-title tracking-[0.2em] text-[#C2CEC2]/75 uppercase">
-            <span>Loading Invitation</span>
-            <span className="font-mono text-[#C5A869]">{Math.floor(displayedProgress)}%</span>
+            {/* Inner subtle pulse accent dot */}
+            <div className="w-1.5 h-1.5 rounded-full bg-[#2B2620]/60 animate-ping" aria-hidden="true" />
           </div>
         </div>
+
       </div>
     </div>
   );

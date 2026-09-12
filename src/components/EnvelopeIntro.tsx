@@ -7,6 +7,7 @@ interface EnvelopeIntroProps {
 
 export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
   const [hasStarted, setHasStarted] = useState(false);
+  const [isWaxSealVanished, setIsWaxSealVanished] = useState(false);
   const [isTextFaded, setIsTextFaded] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -16,13 +17,20 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
     if (hasStarted) return;
     setHasStarted(true);
 
-    const video = videoRef.current;
-    if (video) {
-      video.currentTime = 0;
-      video.play().catch((err) => {
-        console.warn('Video playback prevented:', err);
-      });
-    }
+    // Wax seal vanishes immediately upon click
+    setIsWaxSealVanished(true);
+
+    // Brief delay so the seal vanishes cleanly before the opening animation starts
+    setTimeout(() => {
+      const video = videoRef.current;
+      if (video) {
+        video.currentTime = 0;
+        video.muted = true;
+        video.play().catch((err) => {
+          console.warn('Video playback prevented:', err);
+        });
+      }
+    }, 180);
 
     // Safety fallback timer: slowly fade text away ~2 seconds into playback
     timerRef.current = setTimeout(() => {
@@ -59,6 +67,10 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
   };
 
   useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.muted = true;
+      videoRef.current.defaultMuted = true;
+    }
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
@@ -90,6 +102,7 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
           playsInline
           webkit-playsinline="true"
           preload="auto"
+          muted
           onEnded={handleVideoComplete}
           onTimeUpdate={handleTimeUpdate}
           className="w-full h-full object-cover sm:object-contain border-none outline-none shadow-none"
@@ -97,20 +110,66 @@ export const EnvelopeIntro: React.FC<EnvelopeIntroProps> = ({ onComplete }) => {
 
         {/* 
           "You Are Cordially Invited" and "Mateo & Clara"
-          Displayed cleanly over the first frame on the dark brown wood table area.
-          Slowly fades away about 2 seconds in the video.
+          Displayed cleanly over the top floral area with elegant contrast against the light paper.
+          Slowly fades away about 2 seconds into the video.
+        */}
+        {/* 
+          "You Are Cordially Invited" and "Mateo & Clara"
+          Displayed cleanly over the top floral area with enhanced scale and luxury contrast.
+          Slowly fades away about 2 seconds into the video.
         */}
         <div
-          className={`absolute top-[17%] sm:top-[18%] inset-x-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-1000 ease-out ${
+          className={`absolute top-[11%] sm:top-[12%] inset-x-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-1000 ease-out ${
             isTextFaded ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <span className="serif-title text-[11px] sm:text-xs tracking-[0.35em] uppercase text-white font-medium block mb-1 drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)] drop-shadow-[0_4px_12px_rgba(0,0,0,0.85)]">
+          <span className="serif-title text-[19px] sm:text-[21px] md:text-[23px] tracking-[0.25em] sm:tracking-[0.3em] uppercase text-[#8C7853] font-semibold block mb-1.5 drop-shadow-[0_1px_1px_rgba(255,255,255,0.9)]">
             You Are Cordially Invited
           </span>
-          <h1 className="script-font text-4xl sm:text-5xl md:text-6xl text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.95)] drop-shadow-[0_6px_16px_rgba(0,0,0,0.85)]">
+          <h1 className="script-font text-[63px] sm:text-[84px] md:text-[98px] leading-[1.05] text-[#1B4332] drop-shadow-[0_1px_3px_rgba(255,255,255,0.9)]">
             Mateo & Clara
           </h1>
+        </div>
+
+        {/* 
+          PULSATING WAX SEAL:
+          Positioned on the corner/tip of the top flap (in the middle of the envelope).
+          Vanishes cleanly before the opening animation starts when clicked.
+        */}
+        <div
+          className={`absolute top-[58%] left-1/2 -translate-x-1/2 -translate-y-1/2 -mt-[15px] z-30 transition-all duration-200 ease-out pointer-events-none ${
+            isWaxSealVanished ? 'opacity-0 scale-75' : 'opacity-100 scale-100'
+          }`}
+          aria-hidden={isWaxSealVanished}
+        >
+          {/* Subtle pulse ripple ring */}
+          <div className="absolute -inset-2.5 rounded-full border border-[#C5A869]/50 animate-ping opacity-60 pointer-events-none" />
+
+          {/* Realistic Gold Wax Seal Stamp */}
+          <div className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-gradient-to-br from-[#E8D196] via-[#C5A869] to-[#8C6D32] p-1 shadow-[0_8px_25px_rgba(0,0,0,0.55),inset_0_2px_4px_rgba(255,255,255,0.65),inset_0_-2px_4px_rgba(0,0,0,0.6)] flex items-center justify-center animate-pulse">
+            {/* Inner embossed circular ring */}
+            <div className="w-full h-full rounded-full border border-[#7D5E24]/60 bg-gradient-to-br from-[#D4B36A] to-[#A07C35] flex items-center justify-center shadow-[inset_0_1.5px_2px_rgba(255,255,255,0.45),0_1px_2px_rgba(0,0,0,0.4)]">
+              {/* Monogram Seal Stamp */}
+              <span className="serif-title text-[11px] sm:text-xs tracking-wider text-[#473614] font-bold drop-shadow-[0_1px_0.5px_rgba(255,255,255,0.5)] select-none">
+                M &amp; C
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* 
+          "Click the envelope" prompt at the bottom of the envelope
+        */}
+        <div
+          className={`absolute bottom-[9%] sm:bottom-[11%] inset-x-0 z-20 flex flex-col items-center justify-center text-center px-4 pointer-events-none transition-opacity duration-700 ease-out ${
+            isTextFaded ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/80 backdrop-blur-xs border border-[#1B4332]/20 shadow-[0_2px_10px_rgba(0,0,0,0.06)] animate-pulse">
+            <span className="serif-title text-[10px] sm:text-xs tracking-[0.25em] uppercase text-[#1B4332] font-semibold">
+              Click the envelope
+            </span>
+          </div>
         </div>
       </div>
     </div>
